@@ -1,0 +1,232 @@
+<section class="right-2">
+  <div
+    class="offcanvas offcanvas-end"
+    [ngClass]="{ show: !asideState.hidden }"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+        (click)="closeAside()"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <h3>Registro de gasto</h3>
+
+      <form class="row" [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+        <div class="col-lg-10">
+          <ngx-select
+            class="form-select select_arrow"
+            [items]="patientList"
+            [placeholder]="'Nombre del paciente'"
+            formControlName="patient"
+          >
+          </ngx-select>
+          <div
+            *ngIf="
+              expenseForm.get('patient').invalid &&
+              expenseForm.get('patient').touched
+            "
+            class="text-danger"
+          >
+          Paciente is required.
+          </div>
+        </div>
+        <div class="col-lg-10">
+          <input
+            type="text"
+            name=""
+            class="width"
+            placeholder="Concepto"
+            formControlName="payment_purpose"
+          />
+          <div
+            *ngIf="
+              expenseForm.get('payment_purpose').invalid &&
+              expenseForm.get('payment_purpose').touched
+            "
+            class="text-danger"
+          >
+            Condepto is required.
+          </div>
+        </div>
+        <div class="col-lg-10">
+          <select
+            class="form-select select_arrow"
+            id="edit-select"
+            aria-label="Default select example"
+            formControlName="category"
+          >
+            <option selected value="">
+              <span style="color: gray !important">Categoría</span>
+            </option>
+            <option
+              *ngFor="let category of categories; let i = index"
+              [value]="category.id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              expenseForm.get('category').invalid &&
+              expenseForm.get('category').touched
+            "
+            class="text-danger"
+          >
+            Categoría is required.
+          </div>
+        </div>
+        <div class="col-lg-10 mt-2">
+          <ngx-select
+            class="form-select select_arrow"
+            [items]="providers"
+            [placeholder]="'Proveedor'"
+            formControlName="provider"
+          >
+          </ngx-select>
+          <div
+            *ngIf="
+              expenseForm.get('provider').invalid &&
+              expenseForm.get('provider').touched
+            "
+            class="text-danger"
+          >
+            Proveedor is required.
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-5">
+            <input
+              type="text"
+              placeholder="Costo:"
+              class="width"
+              formControlName="cost"
+              (ngModelChange)="onValueChanges($event)"
+            />
+          </div>
+          <div class="col-lg-5 float-right">
+            <input
+              type="text"
+              placeholder="Cantidad:"
+              class="width"
+              formControlName="quantity"
+              (ngModelChange)="onValueChanges($event)"
+            />
+          </div>
+
+          <div class="col-lg-5">
+            <input
+              type="text"
+              placeholder="Registrar Pago:"
+              name=""
+              class="width"
+              formControlName="amount"
+              readonly
+            />
+          </div>
+
+          <div class="col-lg-5 col-5">
+            <li class="btn-1" (click)="registerRecord()">
+              <span> + Registrar</span>
+            </li>
+          </div>
+        </div>
+
+        <div class="col-lg-10">
+          <div class="span row">
+            <div class="col-lg-6">
+              <span style="color: #a7a9ac; font-weight: 800">Pagado</span>
+              <span class="float-right">
+                ${{ this.expenseForm.get("paid").value || 00.0 }}</span
+              >
+            </div>
+            <div class="float-right- col-lg-6">
+              <span style="color: #a7a9ac; font-weight: 800"> Por pagar</span>
+              <span style="color: #ff4747" class="float-right">
+                $0.0</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="col-lg-10 mt-2">
+          <select
+            class="form-select select_arrow"
+            aria-label="Default select example"
+            formControlName="status"
+            id="edit-select"
+          >
+            <option selected value="">
+              <span style="color: gray !important">Estatus</span>
+            </option>
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+          </select>
+          <div
+            *ngIf="
+              expenseForm.get('status').invalid &&
+              expenseForm.get('status').touched
+            "
+            class="text-danger"
+          >
+            Estatus is required.
+          </div>
+        </div> -->
+
+        <div class="col-lg-10">
+          <select
+            class="form-select select_arrow"
+            id="edit-select"
+            aria-label="Default select example"
+            aria-placeholder="Método de pago"
+            formControlName="payment_method"
+          >
+            <option value="" selected id="color-add">
+              <span style="color: gray !important">Método de pago</span>
+            </option>
+            <option
+              *ngFor="let method of paymentMethods; let i = index"
+              [value]="method.id"
+            >
+              {{ method.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              expenseForm.get('payment_method').invalid &&
+              expenseForm.get('payment_method').touched
+            "
+            class="text-danger"
+          >
+            Método de pago is required.
+          </div>
+        </div>
+
+        <div class="col-lg-10">
+          <label
+            for=""
+            style="color: #a7a9ac; padding-bottom: 2px; font-size: 16px"
+            >Comentarios</label
+          >
+          <textarea
+            type="text"
+            rows="5"
+            name=""
+            class="width"
+            style="height: auto"
+            formControlName="comments"></textarea>
+          <button class="PAGAR" type="submit">PAGAR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

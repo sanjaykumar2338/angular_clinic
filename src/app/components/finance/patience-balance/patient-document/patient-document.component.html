@@ -1,0 +1,193 @@
+    <!-- upload section  -->
+    <section class="upload mt-4">
+        <div class="container">
+            <h3 class="Documentos">Documentos</h3>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div class="upload-style-box">
+                        <h6 class="Identificación">Identificación oficial</h6>
+                        <div class="style-upload">
+                            <div class="image-upload-wrap">
+                                <input class="file-upload-input" type='file'
+                                    name="fileInput1"
+                                    accept=".jpg, .jpeg, .png, .pdf" (change)="onFileSelected($event, fileInput1)" #fileInput1 />
+                                <div class="drag-text">
+                                    <h4 class="Arrastar">Arrastar archivo o <span
+                                            style="color: #34367F; border-bottom: 2px solid #34367F;">Explorar</span>
+                                    </h4>
+                                    <img src="images/Upload icon.png" alt="">
+                                    <p class="Formatos">Formatos permitidos JPEG, PNG, PDF</p>
+                                </div>
+                            </div>
+                            <div class="file-upload-content">
+                                <img class="file-upload-image" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                            class="image-title">Uploaded Image</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="Cargar" (click)="openFileInput(fileInput1)"> Cargar archivo</button>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-3 col-md-6 col-sm-12 col-12 ">
+                    <div class="upload-style-box">
+                        <h6 class="Identificación">Constancia SAT</h6>
+                        <div class="style-upload">
+                            <div class="image-upload-wrap">
+                                <input class="file-upload-input" type='file' (change)="onFileSelected($event, fileInput2)" #fileInput2
+                                    name="fileInput2"
+                                    accept=".jpg, .jpeg, .png, .pdf"  />
+                                <div class="drag-text">
+                                    <h4 class="Arrastar">Arrastar archivo o <span
+                                            style="color: #34367F; border-bottom: 2px solid #34367F;">Explorar</span>
+                                    </h4>
+                                    <img src="images/Upload icon.png" alt="">
+                                    <p class="Formatos">Formatos permitidos JPEG, PNG, PDF</p>
+                                </div>
+                            </div>
+                            <div class="file-upload-content">
+                                <img class="file-upload-image" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                            class="image-title">Uploaded Image</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class=" Cargar" (click)="openFileInput(fileInput2)"> Cargar archivo</button>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="col-lg-3 col-md-6 col-sm-12 col-12 ">
+                    <div class="upload-style-box">
+                        <h6 class="Identificación">Comprobante de docimicilio</h6>
+                        <div class="style-upload">
+                            <div class="image-upload-wrap">
+                                <input class="file-upload-input" type='file' (change)="onFileSelected($event, fileInput3)" #fileInput3
+                                    name="fileInput3"
+                                    accept=".jpg, .jpeg, .png, .pdf"  />
+                                <div class="drag-text">
+                                    <h4 class="Arrastar">Arrastar archivo o <span
+                                            style="color: #34367F; border-bottom: 2px solid #34367F;">Explorar</span>
+                                    </h4>
+                                    <img src="images/Upload icon.png" alt="">
+                                    <p class="Formatos">Formatos permitidos JPEG, PNG, PDF</p>
+                                </div>
+                            </div>
+                            <div class="file-upload-content">
+                                <img class="file-upload-image" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                            class="image-title">Uploaded Image</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class=" Cargar" (click)="openFileInput(fileInput3)"> Cargar archivo</button>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div class="upload-style-box">
+                        <h6 class="Identificación">Póliza de seguro</h6>
+                        <div class="style-upload">
+                            <div class="image-upload-wrap">
+                                <input class="file-upload-input" type='file' (change)="onFileSelected($event, fileInput4)" #fileInput4
+                                    accept=".jpg, .jpeg, .png, .pdf" 
+                                    name="fileInput4"
+                                    />
+                                <div class="drag-text">
+                                    <h4 class="Arrastar">Arrastar archivo o <span
+                                            style="color: #34367F; border-bottom: 2px solid #34367F;">Explorar</span>
+                                    </h4>
+                                    <img src="images/Upload icon.png" alt="">
+                                    <p class="Formatos">Formatos permitidos JPEG, PNG, PDF</p>
+                                </div>
+                            </div>
+                            <div class="file-upload-content">
+                                <img class="file-upload-image" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                            class="image-title">Uploaded Image</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class=" Cargar" (click)="openFileInput(fileInput4)"> Cargar archivo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- upload section close -->
+
+
+
+    <section class="table-3">
+        <div class="container">
+            
+            <p>Facturas</p>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-edit">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Fecha
+                                    </th>
+                                    <th> Tipo </th>
+                                    <th>
+                                        Nombre del archivo
+                                    </th>
+                                    <th>
+                                        Descargar
+                                    </th>
+                                    <th>
+                                        Eliminar
+                                    </th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let document of documentList | paginate : { itemsPerPage: 10, currentPage: page }; let i = index;">
+                                    <td>{{document.created_at | momentDate : "YYYY-MM-DD" }}</td>
+                                    <td>{{document.type}}</td>
+                                    <td>{{document.document.split('/').pop()}}</td>
+                                <td> <img src="../../../../assets/images/download 1.png" alt="" (click)="downloadDocument(document)"></td>
+                                    <td> <img src="../../../../assets/images/x-mark.png" alt="" (click)="deleteDocument(document.id)"></td>
+                                    
+                                </tr>
+                                <tr *ngIf="!documentList.length && !showLoader" class="text-center">
+                                    <td colspan="5">No se han encontrado resultados</td>
+                                  </tr>
+                                  <tr *ngIf="showLoader" class="text-center">
+                                    <td colspan="5">
+                                      <div class="row">
+                                        <div class="col-12 text-end">
+                                          <app-loader></app-loader>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 text-end">
+                          <pagination-controls
+                            (pageChange)="page = $event"
+                          ></pagination-controls>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>  
+    </section>

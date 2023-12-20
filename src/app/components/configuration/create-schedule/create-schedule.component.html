@@ -1,0 +1,243 @@
+<section class="time-table overflow-hidden">
+  <div class="container">
+    <h4 class="Administración">Administración de horarios</h4>
+    <form [formGroup]="doctorAvailibilityForm">
+      <div class="row mb-4">
+        <div class="col-lg-4">
+          <label for="" class="Médico">Médico</label>
+          <ngx-select
+            class="select_arrow rounded-select"
+            [items]="doctorList"
+            [placeholder]="'Médico'"
+            formControlName="doctor"
+          >
+          </ngx-select>
+        </div>
+        <div class="col-lg-4">
+          <label for="" class="Médico">Rango de fechas</label>
+          <!-- <input type="date" > -->
+          <div class="input-style date-icon">
+            <span> </span>
+            <input
+              type="text"
+              name="daterangeInput"
+              daterangepicker
+              [options]="datePickerOptions2"
+              class="select-menu"
+              id="input-1"
+              (selected)="selectedDate($event)"
+            />
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <label for="" class="Médico">Espacio/Sala</label>
+          <ngx-select
+            class="rounded-select select_arrow"
+            [items]="rooms"
+            [placeholder]="'Espacio/Sala'"
+            formControlName="room"
+          >
+          </ngx-select>
+        </div>
+      </div>
+      <ng-container formArrayName="days">
+        <div
+          class="row mt-2"
+          *ngFor="
+            let item of doctorAvailibilityForm.get('days').controls;
+            let i = index
+          "
+        >
+          <div class="" [formGroupName]="i">
+            <div class="col-lg-12">
+              <div class="input-box row">
+                <div
+                  class="check-box col-lg-2"
+                  [ngClass]="{ 'mt-4 pt-4': i === 0 }"
+                >
+                  <input type="checkbox" formControlName="checked" />
+                  <label for="" class="Lunes ml-2">
+                    {{ item.get("day")?.value }}</label
+                  >
+                </div>
+                <!-- <ng-container > -->
+                <div formArrayName="slots" class="col-lg-10">
+                  <ng-container
+                    *ngFor="
+                      let slot of item.get('slots').controls;
+                      let slotIndex = index
+                    "
+                  >
+                    <div class="row pb-2" [formGroupName]="slotIndex">
+                      <div class="date-time col-lg-5">
+                        <label
+                          for=""
+                          class="Inicio"
+                          *ngIf="i === 0 && slotIndex === 0"
+                          >Inicio</label
+                        >
+                        <input
+                          type="time"
+                          class="time"
+                          formControlName="startTime"
+                          (change)="validateStartTime(i, slotIndex)"
+                        />
+                      </div>
+                      <div class="col-lg-5">
+                        <div class="date-time">
+                          <label
+                            for=""
+                            class="Inicio"
+                            *ngIf="i === 0 && slotIndex === 0"
+                            >Fin</label
+                          >
+                          <input
+                            type="time"
+                            class="time"
+                            formControlName="endTime"
+                            (change)="validateEndTime(i, slotIndex)"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="add-new-col col-md-2 mt-2"
+                        [ngClass]="{ 'mt-5': i === 0 && slotIndex === 0 }"
+                      >
+                        <li
+                          class="plus-add"
+                          (click)="addSlot(i)"
+                          *ngIf="slotIndex === 0"
+                        >
+                          +
+                        </li>
+                        <img
+                          src="../../../assets/images/trash 1.png"
+                          alt=""
+                          *ngIf="slotIndex !== 0"
+                          (click)="removeSlot(i, slotIndex)"
+                        />
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="i-put">
+        <span class="Duración"> Duración de las consultas</span>
+        <select
+          class="form-select"
+          id="width"
+          aria-label="Default select example"
+          formControlName="duration"
+        >
+          <option value="" selected>Duración</option>
+          <option value="15">15 min</option>
+          <option value="30">30 min</option>
+          <option value="60">60 min</option>
+          <option value="90">90 min</option>
+          <option value="120">120 min</option>
+          <option value="150">150 min</option>
+          <option value="180">180 min</option>
+          <option value="210">210 min</option>
+        </select>
+      </div>
+      <button class="AGENDAR" (click)="saveDoctorAvailibility()">
+        AGENDAR
+      </button>
+    </form>
+  </div>
+</section>
+
+<section class="table-add-one">
+  <div class="container">
+    <h4 class="Horarios">Horarios disponibles creados</h4>
+    <div class="align-input">
+      <div class="one-side-input">
+        <ngx-select
+          class="select_arrow rounded-select"
+          [items]="doctorList"
+          [placeholder]="'Médico'"
+          (selectionChanges)="onSelectionChanges($event)"
+        >
+        </ngx-select>
+      </div>
+      <div class="right-side-input">
+        <div class="input-style date-icon">
+          <span> </span>
+          <input
+            type="text"
+            name="daterangeInput"
+            daterangepicker
+            [options]="datePickerOptions"
+            (selected)="filterByDate($event)"
+            class="select-menu"
+            id="input-1"
+          />
+        </div>
+      </div>
+    </div>
+    <table class="w-100-1">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Estatus</th>
+          <th>Médico</th>
+          <th>Consultorios/Salas</th>
+          <th>Horario</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of slotList
+              | paginate : { itemsPerPage: 10, currentPage: p }
+          "
+        >
+          <td>{{ item.date }}</td>
+          <td
+            style="color: #00b050; font-weight: 700"
+            style="color: #ff4747; font-weight: 700"
+          >
+            {{ item.status ? "Agendada" : "No Agendada" }}
+          </td>
+          <td>{{ item.doctor_name }}</td>
+          <td>{{ item.room_name }}</td>
+          <td>{{ item.startTime }} - {{ item.endTime }}</td>
+          <td>
+            <img
+              src="../../../assets/images/trash 1.png"
+              alt=""
+              (click)="
+                deleteTimeSlot(item.id, item.day, item.startTime, item.endTime)
+              "
+              class="pointer"
+            />
+          </td>
+        </tr>
+        <tr *ngIf="!slotList.length && !listInProcess" class="text-center">
+          <td colspan="5">No se han encontrado resultados</td>
+        </tr>
+        <tr *ngIf="listInProcess" class="text-center">
+          <td colspan="5">
+            <div class="row">
+              <div class="col-12 text-end">
+                <app-loader></app-loader>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="row mt-3">
+      <div class="col-12 text-end">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</section>

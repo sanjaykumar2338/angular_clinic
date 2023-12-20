@@ -1,0 +1,167 @@
+<section class="section-1 margin-top">
+  <div class="full-container edit">
+    <h4 class="Agenda"><span>Agenda de consultas</span></h4>
+    <img src="" alt="" />
+  </div>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-lg-4 col-md-11 col-sm-11">
+        <div class="style-box">
+          <div class="img">
+            <mat-card class="demo-inline-calendar-card">
+              <mat-calendar
+                [(selected)]="selectedDate"
+                (selectedChange)="onDateChange($event)"
+              ></mat-calendar>
+            </mat-card>
+          </div>
+          <div class="inputs">
+            <p class="Bloquear">Bloquear fechas</p>
+
+            <ng-container *ngIf="groupByKey === 'doctor'">
+              <h5 class="Especialistas">Especialistas</h5>
+              <form class="d-flex" role="search">
+                <span class="input-group-text"
+                  ><i class="fa-solid fa-magnifying-glass"></i
+                ></span>
+                <input
+                  type="text"
+                  class=""
+                  placeholder="Buscar especialista"
+                  (keyup)="searchDoctor($event)"
+                />
+              </form>
+              <div class="radio-input" *ngFor="let doctor of specialityList">
+                <input
+                  type="checkbox"
+                  (change)="onSelectDoctor(doctor.id, $event)"
+                />
+                <label for=""> Dr. {{ doctor.text }}</label>
+                <br />
+              </div>
+            </ng-container>
+            <ng-container *ngIf="groupByKey === 'room'">
+              <h5 class="Especialistas">Sala</h5>
+              <form class="d-flex" role="search">
+                <span class="input-group-text"
+                  ><i class="fa-solid fa-magnifying-glass"></i
+                ></span>
+                <input
+                  type="text"
+                  class=""
+                  placeholder="Buscar sala"
+                  (keyup)="searchRoom($event)"
+                />
+              </form>
+              <div class="radio-input" *ngFor="let room of roomsList">
+                <input
+                  type="checkbox"
+                  (change)="onSelectRoom(room.id, $event)"
+                />
+                <label for=""> {{ room.text }}</label>
+                <br />
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-sm-12">
+        <div class="style">
+          <div class="main-box">
+            <div class="btn">
+              <button (click)="onDateChange(moment())">HOY</button>
+            </div>
+            <div class="d-flex">
+              <i
+                class="fa-solid fa-chevron-left mr-3"
+                (click)="previousDate()"
+              ></i>
+              <h4>
+                {{ moment(selectedDate).format("dddd D [de] MMMM YYYY") }}
+              </h4>
+              <i
+                class="fa-solid fa-chevron-right ml-3"
+                (click)="nextDate()"
+              ></i>
+            </div>
+            <div class="btns">
+              <button
+                [class.active]="groupByKey === 'doctor'"
+                (click)="switchAppointment('doctor')"
+              >
+                por Médico
+              </button>
+              <button
+                [class.active]="groupByKey === 'room'"
+                (click)="switchAppointment('room')"
+              >
+                por sala
+              </button>
+            </div>
+          </div>
+          <div class="table-style">
+            <app-loader *ngIf="loading"></app-loader>
+            <table *ngIf="!loading">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th *ngFor="let item of tableHeaders">
+                    {{ item.text }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let timeSlot of timeSlots; let i = index">
+                  <th>{{ timeSlot }}</th>
+                  <ng-container
+                    *ngFor="let item of tableHeaders; let j = index"
+                  >
+                    <td
+                      *ngIf="
+                        hasNoSlotAvailable(item.id, timeSlot) &&
+                        i !== timeSlots.length - 1
+                      "
+                    ></td>
+                    <td
+                      *ngIf="
+                        hasAppointment(item.id, timeSlot) &&
+                        i !== timeSlots.length - 1
+                      "
+                      [attr.rowspan]="getAppointmentRowspan(item.id, timeSlot)"
+                    >
+                      <div class="booked">
+                        {{
+                          getAppointmentText(
+                            isAppointmentScheduled(item.id, timeSlot)
+                          )
+                        }}
+                      </div>
+                    </td>
+                    <td
+                      *ngIf="
+                        hasSlotAvailable(item.id, timeSlot) &&
+                        i !== timeSlots.length - 1
+                      "
+                    >
+                      <div
+                        (click)="openAside(item.id, timeSlot)"
+                        class="available-slot"
+                      ></div>
+                    </td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<schedule-new-appointment
+  [asideState]="asideState"
+  [selectedSlotDetail]="selectedSlotDetail"
+  (onAppointmentSuccess)="onAppointmentSuccess($event)"
+  (onCloseEvent)="onCloseEvent($event)"
+  [groupBy]="groupByKey"
+></schedule-new-appointment>

@@ -1,0 +1,61 @@
+@keyframes shake {
+  0%,
+  10% {
+    transform: translate3d(0x, 0, 0);
+  }
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.fixed-action-btn .btn-floating {
+  animation: shake 3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+.fixed-action-btn:hover .btn-floating {
+  animation: none;
+}
+.btn-floating {
+  opacity: 1 !important;
+  float: right;
+  background-color: rgba(255, 186, 31, 0.95);
+}
+ul li .btn-floating {
+  width: 150px;
+  text-align: left;
+  font-size: 14px;
+  border-radius: 0;
+  padding: 0 10px;
+  border-bottom: 1px solid #fff;
+}
+.btn-floating i {
+  width: 22px;
+}
+.support_page{
+  cursor: pointer;
+}
+.twitter_logo{
+  height: 31px;
+  width: 34px;
+  background: white;
+  border-radius: 16px;
+}

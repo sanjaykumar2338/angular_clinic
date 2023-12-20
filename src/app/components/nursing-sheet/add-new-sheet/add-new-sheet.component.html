@@ -1,0 +1,1084 @@
+<div class="">
+    <!-- heading section  -->
+    <section class="heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-sm-4">
+            <div class="text">
+              <h4>Hoja de Enfermería</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="table-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 ">
+                    <div class="s-box">
+                        <label for="">ID de expediente</label>
+                        <input type="text" name="" id="" class="form-input" placeholder="" (change)="onfileIdChange($event)" [(ngModel)]="expedienteId"  />
+                    </div>
+
+                </div>
+                <div class="col-lg-7 ">
+                    <div class="s-box">
+                        <label for="">Nombre Completo:</label>
+                        <input type="text" name="" class="form-input" placeholder="Nombre completo del paciente" [(ngModel)]="fileDetails.fullname" />
+
+                    </div>
+
+                </div>
+                <div class="col-lg-3 ">
+                    <div class="s-box">
+                        <label for="" class="mt-4 d-flex">Sexo</label>
+                        <label  >Hombre</label>
+                        <input type="radio" name="gender" value="1" class="radio-btn"
+                        [checked]="fileDetails.gender == 1"
+                        (change)="fileDetails.gender = 1"
+                        >
+
+                        <label >Mujer</label>
+                        <input type="radio" name="gender" value="2" class="radio-btn"
+                        [checked]="fileDetails.gender == 2"
+                        (change)="fileDetails.gender = 2"
+                        >
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-4 col-xs-12 col-sm-12">
+                    <span class="Fecha"> Fecha de nacimiento:</span>
+                    <div class="row">
+                        <div class="col-lg-3 ">
+                            <input type="text" placeholder="DD" name="" id=""  class="form-input-1" [value]="dob?.day">
+                        </div>
+                        <div class="col-lg-6  row">
+                            <input type="text" placeholder="MM" name="" id=""  class="form-input-1" [value]="dob?.month">
+                        </div>
+                        <div class="col-lg-3  ">
+                            <input type="text" placeholder="YYYY" name="" id=""  class="form-input-1" [value]="dob?.year">
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-lg-2 ">
+                    <div class="s-box">
+                        <span class="Fecha">Escolaridad</span>
+                        <input type="text" name="" id="" class="i-p"
+                        [(ngModel)]="fileDetails.education" />
+                    </div>
+                </div>
+                <div class="col-lg-2 ">
+                    <div class="s-box">
+                        <span class="Fecha">Estado Civil</span>
+                        <input type="text" name="" id="" class="i-p" 
+                        [(ngModel)]="fileDetails.maritalStatus" />
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3 ">
+                    <div class="s-box">
+                        <span class="Fecha">Ocupación</span>
+                        <input type="text" name="" id="" class="i-p" 
+                        [(ngModel)]="fileDetails.occupation" />
+
+                    </div>
+                </div>
+
+                <div class="col-lg-1">
+                    <div class="s-box">
+                        <label for="">Edad</label>
+                        <input type="text" name="" id="" class="i-put" [(ngModel)]="fileDetails.age" />
+ 
+                    </div>
+                </div>
+
+                <div class="col-lg-3 ">
+                    <div class="s-box">
+                        <label for="">Lugar de procedencia</label>
+                        <input type="text" name="" id="" class="i-put"
+                        [(ngModel)]="fileDetails.placeOrigin" /> 
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-2 ">
+                    <div class="s-box">
+                        <p>Alergías</p>
+                        <label  >Si</label>
+                        <input type="radio"  name="hasAllergies" value="true" class="radio-btn"
+                        [checked]="fileDetails.allergies.hasAllergy"
+                        (change)="fileDetails.allergies.hasAllergy = true"
+                        />
+                        <label >No</label>
+                        <input type="radio" name="hasAllergies" value="false" class="radio-btn"
+                        [checked]="!fileDetails.allergies.hasAllergy"
+                        (change)="fileDetails.allergies.hasAllergy = false"
+                        />
+                    </div>
+                </div>
+
+                <div class="col-lg-3 ">
+                    <div class="s-box">
+                        <label for="">Especificar Alergias</label>
+                        <input type="text" name="" id="" class="i-put" 
+                        [(ngModel)]="fileDetails.allergies.specificAllergy" />
+                        
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="s-box">
+                        <label for="">Nombre del responsable o cuidador</label>
+                        <input type="text" name="" id="" class="i-put" 
+                        [(ngModel)]="fileDetails.caregiver" 
+                        />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="s-box">
+                        <label for="">Médico tratante</label>
+                        <input type="text" name="" id="" class="i-put" 
+                        [value]="doctorName" readonly 
+                        />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="s-box">
+                        <label for="">Ubicación del paciente</label>
+                        <input type="text" name="" id="" class="i-put" 
+                        [(ngModel)]="fileDetails.location" 
+                        />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="Valoraciones">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 scroll-1">
+                    <h4>Valoraciones de constantes vitales</h4>
+                    <!-- <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>1RA</th>
+                                <th>2DA</th>
+                                <th>3RA</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="set-box">
+                                <td>
+                                    <div class="input">
+                                        <label for="">Fecha</label>
+                                        <input 
+                                        type="text"
+                                        name="daterangeInput"
+                                        daterangepicker
+                                        [options]="datePickerOptions"
+                                        (selected)="onSelectDate($event)"
+                                         id="date">
+                                    </div>
+                                </td>
+                                <td>
+                                    <li class="btn-color" style="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                            <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="Agregar" (click)="addVisitDate()"> Agregar</span>
+                                    </li>
+                                </td>
+                                <td class="s-t" *ngFor="let item of fileDetails?.vitalSignAssement?.date?.reverse()">
+                                    <li  class="only-color">
+                                        {{item.value}}
+
+                                    </li>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Fecha</label>
+                            <input 
+                            type="text"
+                            name="daterangeInput"
+                            daterangepicker
+                            [options]="datePickerOptions"
+                            (selected)="onSelectDate($event)"
+                             id="date">
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar" (click)="addVisitDate()"> Agregar</span>
+                        </li>
+                        <div class="mt-4 scroller">
+                            <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.date?.reverse()" >
+                                {{item.value}}
+                            </li>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Hora</label>
+                            <input type="time" 
+                            [(ngModel)]="visitTime"
+                            style="min-width: 190px"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar" 
+                            (click)="addVisitTime()"> Agregar</span>
+                             
+                        </li>
+                        <div class="mt-4 scroller">
+                        <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.time?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+
+                    </div>
+
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Edad actual</label>
+                            <input type="text"
+                            [(ngModel)]="age"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"
+                            (click)="addAge()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color " *ngFor="let item of fileDetails?.vitalSignAssement?.age?.reverse()">
+                            {{item.value}}
+                        </li>
+                    </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Tensión Arterial</label>
+                            <input type="text"
+                            [(ngModel)]="bloodPressure"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar" 
+                            (click)="addBloodPressure()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                            <li class="only-color " *ngFor="let item of fileDetails?.vitalSignAssement?.bloodPressure?.reverse()">
+                                {{item.value}}
+                            </li>    
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Frecuencia Cardiaca</label>
+                            <input type="text" 
+                            [(ngModel)]="heartRate"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"
+                            (click)="addHeartRate()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.heartRate?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Frecuencia Respirador</label>
+                            <input type="text"
+                            [(ngModel)]="respiratoryRate"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"
+                            (click)="addRespiratoryRate()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.respiratoryRate?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Temperatura</label>
+                            <input type="text" 
+                            [(ngModel)]="temperature"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"
+                            (click)="addTemperature()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.temperature?.reverse()"> 
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 scroll-1  ">
+                    <h4>Somatometría</h4>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Peso Actual</label>
+                            <input type="text" [(ngModel)]="actualWeight"
+                            (ngModelChange)="calculateBMIClassification()"
+                            
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar" (click)="addActualWeight()"> Agregar</span>
+                        </li>
+                        <div class="mt-4 scroller">
+                            <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.actualWeight?.reverse()">
+                                {{item.value}} lbs
+                            </li>
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Peso Ideal</label>
+                            <input type="text" 
+                            [(ngModel)]="idealWeight"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"
+                            (click)="addIdealWeight()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color"  *ngFor="let item of fileDetails?.vitalSignAssement?.idealWeight?.reverse()">
+                            {{item.value}} lbs
+                        </li>
+                        </div>
+                    </div>
+
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Talla</label>
+                            <input type="text" 
+                            [(ngModel)]="height"
+                            (ngModelChange)="calculateBMIClassification()"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"
+                            (click)="addHeight()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.height?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">IMC</label>
+                            <input type="text"
+                            [(ngModel)]="bmi"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"
+                            (click)="addBmi()" > Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.bmi?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Perímetro Cefálico</label>
+                            <input type="text"
+                            [(ngModel)]="headCircumference"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar" 
+                            (click)="addHeadCircumference()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color"  *ngFor="let item of fileDetails?.vitalSignAssement?.headCircumference?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Perímetro Abdominal</label>
+                            <input type="text"
+                            [(ngModel)]="abdominalCircumference"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"t
+                            (click)="addAbdominalCircumference()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color" *ngFor="let item of fileDetails?.vitalSignAssement?.abdominalCircumference?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                    <div class="set-box">
+                        <div class="input">
+                            <label for="">Perímetro de Cadera</label>
+                            <input type="text" 
+                            [(ngModel)]="hipCircumference"
+                            />
+                        </div>
+                        <li class="btn-color mt-4" style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar" 
+                            (click)="addHipCircumference()"> Agregar</span>
+                        </li>
+                        <div class="scroller mt-4">
+                        <li class="only-color"  *ngFor="let item of fileDetails?.vitalSignAssement?.hipCircumference?.reverse()">
+                            {{item.value}}
+                        </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-4 scroll-1 ">
+                    <div class="box">
+                        <p>Infecciones respiratorias agudas</p>
+                        <div class="s-box">
+                            <label  >Si</label>
+                            <input type="radio" name="hasRespiratoryInfections" value="true" class="radio-btn" 
+                            [checked]="fileDetails.medicalHistory.respiratoryInfections.hasRespiratoryInfections"
+                            (change)="fileDetails.medicalHistory.respiratoryInfections.hasRespiratoryInfections = true"
+                            />
+                            <label >No</label>
+                            <input type="radio" name="hasRespiratoryInfections" value="false" class="radio-btn"
+                            [checked]="!fileDetails.medicalHistory.respiratoryInfections.hasRespiratoryInfections"
+                            (change)="fileDetails.medicalHistory.respiratoryInfections.hasRespiratoryInfections = false"
+                            />
+                            <p class="mt-1">Tipo</p>
+                        </div>
+                        <input type="text" name="respiratoryInfections_type" id="input-1" 
+                        [(ngModel)]="fileDetails.medicalHistory.respiratoryInfections.type"
+                         />
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 scroll-1 ">
+                    <div class="box">
+                        <p>Enfermedades diarreicas agudas</p>
+                        <div class="s-box">
+                            <label  >Si</label>
+                            <input type="radio"  name="hasAcuteDiarrhealDiseases" value="true" class="radio-btn"
+                            [checked]="fileDetails.medicalHistory.acuteDiarrhealDiseases.hasAcuteDiarrhealDiseases"
+                            (change)="fileDetails.medicalHistory.acuteDiarrhealDiseases.hasAcuteDiarrhealDiseases = true"
+                            />
+                            <label >No</label>
+                            <input type="radio"  name="hasAcuteDiarrhealDiseases" value="false" class="radio-btn"
+                            [checked]="!fileDetails.medicalHistory.acuteDiarrhealDiseases.hasAcuteDiarrhealDiseases"
+                            (change)="fileDetails.medicalHistory.acuteDiarrhealDiseases.hasAcuteDiarrhealDiseases = false"
+                            />
+                            <p class="mt-1">Cuando</p>
+                        </div>
+                        <input type="text" name="" id="input-1" 
+                        [(ngModel)]="fileDetails.medicalHistory.acuteDiarrhealDiseases.when"
+                        />
+                    </div>
+                </div>
+
+                <div class="col-lg-4 ">
+                    <div class="box">
+                        <p>Método anticonceptivo</p>
+                        <div class="s-box">
+                            <label  >Si</label>
+                            <input type="radio"  name="usesContraceptiveMethod" value="true" class="radio-btn"
+                            [checked]="fileDetails.medicalHistory.contraceptiveMethod.usesContraceptiveMethod"
+                            (change)="fileDetails.medicalHistory.contraceptiveMethod.usesContraceptiveMethod = true"
+                            />
+                            <label >No</label>
+                            <input type="radio"  name="usesContraceptiveMethod" value="false" class="radio-btn"
+                            [checked]="!fileDetails.medicalHistory.contraceptiveMethod.usesContraceptiveMethod"
+                            (change)="fileDetails.medicalHistory.contraceptiveMethod.usesContraceptiveMethod = false"
+                            />
+                            <p class="mt-1">Especificar</p>
+                        </div>
+                        <input type="text" name="" id="input-1"
+                        [(ngModel)]="fileDetails.medicalHistory.contraceptiveMethod.specifyMethod"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-6 scroll-1 ">
+                    <h3>Control de nutrición</h3>
+                    <div class="box-2">
+                        <div class="flex-set">
+                            <input type="text" name="" id="" placeholder="Peso"  [value]="actualWeight" readonly>
+                            <input type="text" name="" id="" placeholder="Talla" [value]="height" readonly>
+                        </div>
+
+                        <div class="set-text">
+                            <input type="text" name="" id="" class="mt-2" placeholder="IMC" [value]="bmi" readonly> 
+                            <span><img src="../../../assets/images/equal 1.png" alt=""></span>
+                            <span style="color:#FF4747 ; font-weight: 800;">{{classificationResult}}</span>
+                        </div>
+                        <!-- <span class="A">5TA</span>
+                        <span class="A">4TA</span>
+                        <span class="A">3RA</span> -->
+
+
+                        <div class="btn-and-text">
+                            <span style="color:#FF4747 ; font-weight: 800;"> {{classificationResult}}</span>
+                            <li class="btn-color " style="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                    <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <span class="Agregar"> Agregar</span>
+                            </li>
+                        </div>
+                        <li class="only-color" *ngFor="let item of fileDetails?.nutritionalControl?.reverse()">
+                            {{item.value}}
+                        ></li>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6 scroll-1">
+                    <h3>Enfermedades crónicas</h3>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="box-3 col-lg-12">
+                                <div class="row">
+                                <div class="s-box col-lg-3 mt-3">
+                                    <p class="Diiabetes">Diabetes</p>
+                                    <label  >Si</label>
+                                    <input type="radio"  name="diabetes" value="Si" class="radio-btn" 
+                                    [(ngModel)]="diabetes"
+                                    />
+                                    <label >No</label>
+                                    <input type="radio"  name="diabetes" value="No" class="radio-btn"
+                                    [(ngModel)]="diabetes" 
+                                    />
+                                </div>
+                                <div class="col-lg-9  set-box">
+                                    <li class="btn-color">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                            <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="Agregar"
+                                        (click)="addDiabetes()"
+                                        > Agregar</span>
+                                    </li>
+                                    <div class="scroller">
+                                        <li class="only-color" *ngFor="let item of fileDetails?.chronicDiseases.diabetes.reverse()">
+                                            {{item.value}}
+                                        </li>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="box-3 col-lg-12 mt-3">
+                                <div class="row">
+                                <div class="s-box col-lg-3">
+                                    <p class="Diiabetes">Hipertnsion</p>
+                                    <label  >Si</label>
+                                    <input type="radio"  name="hypertension" value="Si" class="radio-btn"
+                                    [(ngModel)]="hypertension"
+                                    >
+                                    <label >No</label>
+                                    <input type="radio"  name="hypertension" value="No" class="radio-btn" 
+                                    [(ngModel)]="hypertension"
+                                    >
+                                </div>
+                                <div class="col-lg-9  set-box ">
+                                    <li class="btn-color">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                            <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="Agregar" (click)="addHypertension()"
+                                        > Agregar</span>
+                                    </li>
+                                    <div class="scroller">
+                                        <li class="only-color" *ngFor="let item of fileDetails?.chronicDiseases.hypertension.reverse()">
+                                            {{item.value}}
+                                        </li>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="box-3 col-lg-12 mt-3">
+                                <div class="row">
+                                <div class="s-box col-lg-3">
+                                    <p class="Diiabetes">Obesidad</p>
+                                    <label  >Si</label>
+                                    <input type="radio"  name="obesity" value="Si" class="radio-btn" 
+                                    [(ngModel)]="obesity"
+                                    >
+                                    <label >No</label>
+                                    <input type="radio"  name="obesity" value="No" class="radio-btn" 
+                                    [checked]="true"
+                                    [(ngModel)]="obesity"
+                                    >
+                                </div>
+                                <div class="col-lg-9  set-box">
+                                    <li class="btn-color">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                            <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="Agregar" (click)="addObesity()"
+                                        > Agregar</span>
+                                    </li>
+                                    <div class="scroller">
+                                        <li class="only-color" *ngFor="let item of fileDetails?.chronicDiseases.obesity.reverse()">
+                                            {{item.value}}
+                                        </li>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="box-3 col-lg-12 mt-3">
+                                <div class="row">
+                                <div class="s-box col-lg-3">
+                                    <p class="Diiabetes">Dislipdemias</p>
+                                    <label  >Si</label>
+                                    <input type="radio"  name="dyslipidemias" value="Si" class="radio-btn"  
+                                    [(ngModel)]="dyslipidemias"
+                                    >
+                                    <label >No</label>
+                                    <input type="radio"  name="dyslipidemias" value="No" class="radio-btn" 
+                                    [(ngModel)]="dyslipidemias"
+                                    >
+                                </div>
+                                <div class="col-lg-9  set-box">
+                                    <li class="btn-color">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                            <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="Agregar" (click)="addDyslipidemias()"
+                                        > Agregar</span>
+                                    </li>
+                                    <div class="scroller">
+                                        <li class="only-color" *ngFor="let item of fileDetails?.chronicDiseases.dyslipidemias.reverse()">
+                                            {{item.value}}
+                                        </li>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="box-3 col-lg-12 mt-3">
+                                <div class="row">
+                                <div class="s-box col-lg-3">
+                                    <p class="Diiabetes">Otra</p>
+                                    <input type="text" name="" id="" placeholder="" class="form-control" [(ngModel)]="otherChronicDiseases" />
+                                </div>
+                                <div class="col-lg-9  set-box">
+                                    <li class="btn-color">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                            <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span class="Agregar" (click)="addOthers()"
+                                        > Agregar</span>
+                                    </li>
+                                    <div class="scroller">
+                                        <li class="only-color" *ngFor="let item of fileDetails?.chronicDiseases.others.reverse()">
+                                            {{item.value}}
+                                        </li>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class=" mt-5">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12">
+                        <div class="">
+                            <h3>Visitas / Consultas</h3>
+                            <h6>DATOS OBJ Y SUBJ</h6>
+
+                            <div class="set-input">
+                                <input type="text" name="" id="" class="form-control"
+                                [(ngModel)]="visitConsultation" 
+                                />
+                                <li class="btn-color " style="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                        <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    <span class="Agregar" (click)="addVisitConsultation()"
+                                    > Agregar</span>
+                                </li>
+                            </div>
+
+                            <div class="i-style" *ngFor="let item of fileDetails?.visitsConsultations?.reverse()">
+                                <label for="">
+                                    <input type="text" name="" id="" [value]="item.value">
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="two-cards">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 ">
+                    <div class="style-div">
+                        <h5>DIAGNÓSTICO DE ENFERMERÍA</h5>
+                        <div class="d-flex flex-wrap gap-3">
+                            <select class="form-select" aria-label="Default select example" [(ngModel)]="diagnosisNursing">
+                                <option selected="">Seleccionar</option>
+                                <option [value]="item" *ngFor="let item of diagnosisList">{{item}}</option>
+                            </select>
+                            <li class="btn-color " style="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                    <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <span class="Agregar" (click)="addDiagnosisNursing()"
+                                > Agregar</span>
+                            </li>
+                        </div>
+                        <div class="style-i-1" *ngFor="let item of fileDetails?.diagnosisNursing?.reverse()">
+                            <label for="">
+                                <input type="text" name="" id="" placeholder="" [value]="item.value" />
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-12 ">
+                    <div class="style-div">
+                        <h5>RESULTADOS ESPERADOS</h5>
+                        <div class="d-flex flex-wrap gap-3">
+                            <select class="form-select" aria-label="Default select example" [(ngModel)]="expectedResults">
+                                <option selected="">Seleccionar</option>
+                                <option [value]="item" *ngFor="let item of expectedResultList">{{item}}</option>
+                            </select>
+                            <li class="btn-color " style="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                    <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <span class="Agregar" (click)="addExpectedResults()"
+                                > Agregar</span>
+                            </li>
+                        </div>
+                        <div class="style-i-1" *ngFor="let item of fileDetails?.expectedResults?.reverse()">
+                            <input type="text" name="" id="" [value]="item.value" />
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                    <div class="style-div">
+                        <h5>INTERVENCIONES/
+                            RECOMENDACIONES DE LA GPCE</h5>
+                        <div class="d-flex flex-wrap gap-3">
+                            <select class="form-select" aria-label="Default select example"  [(ngModel)]="interventionsRecommendations"
+                            >
+                                <option selected="">Seleccionar</option>
+                                <option [value]="item" *ngFor="let item of interventionList">{{item}}</option>
+
+                            </select>
+                            <li class="btn-color " style="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                    <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                <span class="Agregar" (click)="addInterventionsRecommendations()" 
+                                > Agregar</span>
+                            </li>
+                        </div>
+                        <div class="style-i-1" *ngFor="let item of fileDetails?.interventionsRecommendations?.reverse()">
+                            <input type="text" name="" id="" [value]="item.value" />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section class="section-3">
+        <div class="container">
+            <h4>Plan Terapeútico</h4>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-4-style">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Medicamento /
+                                        Biológico</th>
+                                    <th>Presentación</th>
+                                    <th>Dosis</th>
+                                    <th>Via</th>
+                                    <th>Hora</th>
+                                    <th>Aplicado</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of fileDetails?.therapeuticPlan?.reverse()">
+                                    <td>{{item.date}}</td>
+                                    <td>{{item.biologicalMedicine}}</td>
+                                    <td>{{item.presentation}}</td>
+                                    <td>{{item.dose}}</td>
+                                    <td>{{item.via}}</td>
+                                    <td>{{item.time}}</td>
+                                    <td>
+                                        <img src="../../../assets/images/no-check.png" alt="" *ngIf="!item.applied">
+                                        <img src="../../../assets/images/check.png" alt="" *ngIf="item.applied">
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <h4>Códigos del (CMGPC) de las GPCE aplicadas</h4>
+                    <div class="d-style">
+                        <input type="text" placeholder="Ingresar código"  [(ngModel)]="appliedCode" >
+                        <li class="btn-color " style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar" (click)="addAppliedCode()"
+                            > Agregar</span>
+                        </li>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-4-style">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Enfermero/a </th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of fileDetails?.appliedCodes?.reverse()">
+                                    <td>{{item.code}}</td>
+                                    <td>{{item.nurse}}</td>
+                                    <td>{{item.date}}</td>
+                                    <td>{{item.time}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="overview">
+                        <label for="">Observaciones</label>
+                        <textarea rows="4"></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-4-style">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Observación</th>
+                                    <th>Enfermero/a </th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of fileDetails?.observations?.reverse()">
+                                    <td>{{item.observation}}</td>
+                                    <td>{{item.nurse}}</td>
+                                    <td>{{item.date}}</td>
+                                    <td>{{item.time}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <h4 class="p-s">Firmar </h4>
+                    <div class="d-style">
+                        <input type="text" placeholder="Ingresar nombre completo"  [(ngModel)]="nurseName" />
+                        <li class="btn-color " style="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21" fill="none">
+                                <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <span class="Agregar"  (click)="addSignatures()"
+                            > Agregar</span>
+                        </li>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-4-style set-padding-top">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Firma </th>
+                                    <th>Cédula</th>
+                                    <th>Grado
+                                        Académico</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of fileDetails?.signatures?.reverse()">
+                                    <td>{{item.name}}</td>
+                                    <td>
+                                        <img [src]="signatureImagePath + item.signature" alt=""  style="max-width: 100px;" />
+                                    </td>
+                                    <td>{{item.license_number}}</td>
+                                    <td>{{item.academic_degree}}</td>
+                                    <td>{{item.date}}</td>
+                                    <td>{{item.time}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+    </section>
+  </div>
+  

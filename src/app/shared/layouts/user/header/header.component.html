@@ -1,0 +1,264 @@
+<header>
+  <nav class="navbar-1">
+    <div class="container-full">
+      <div class="nav">
+        <div class="logo">
+          <img src="./assets/images/logo.png" alt="" />
+          <button
+            class="cst-toogle"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasScrolling"
+            aria-controls="offcanvasScrolling"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <div class="right-menu">
+          <button routerLink="/schedule-appointment" class="btn-style">
+            Agendar Consultas
+          </button>
+          <button routerLink="/logout" class="Cerrar">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- slde menu  -->
+<section class="slide-menu">
+  <div
+    class="offcanvas offcanvas-start show"
+    data-bs-scroll="true"
+    data-bs-backdrop="false"
+    tabindex="-1"
+    id="offcanvasScrolling"
+    aria-labelledby="offcanvasScrollingLabel"
+  >
+    <div class="img-box-1 mt-3 sld-btn">
+      <img
+        src="./assets/images/menu.png"
+        class=""
+        alt=""
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling"
+      />
+    </div>
+    <!--<div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>-->
+    <div class="offcanvas-body">
+      <!-- <div class="img-box">
+                    <img src="images/menu.png" alt="" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                </div> -->
+      <div class="logo-1">
+        <div class="clinic-logo">
+          <img
+            *ngIf="clinicDetail.picture"
+            [src]="clinicDetail.picture"
+            class="img-1"
+            alt=""
+          />
+          <img
+            *ngIf="!clinicDetail.picture"
+            [src]="'./assets/images/logo-1.png'"
+            class="img-1"
+            alt=""
+          />
+        </div>
+
+        <div class="text">
+          <h4>{{ clinicDetail.clinic_name }}</h4>
+          <span>{{ clinicDetail.insta_id }}</span
+          ><br />
+          <img src="./assets/images/line.png" class="img-2" alt="" />
+          <h3><strong> Plan Medizona Clínicas </strong></h3>
+          <p>Tu plan vence el 20/08/2023</p>
+        </div>
+      </div>
+
+      <div class="main-nav" routerLinkActive="set-color-bg">
+        <div class="img-text">
+          <a routerLink="/schedule-appointment">
+            <img
+              [src]="
+                isActive('/schedule-appointment')
+                  ? './assets/images/calendar_white.png'
+                  : './assets/images/calendar_blue.png'
+              "
+              alt=""
+            />
+            <span style="margin-left: 10px">Agenda de Consultas</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              routerLinkActive="set-color-bg"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
+            >
+              <div class="one-box-1" routerLink="/finance/revenue">
+                <span> <img src="./assets/images/Finanzas.png" alt="" /></span>
+                <span style="margin-left: 10px"> Finanzas</span>
+              </div>
+              <div class="two-box-2">
+                <span><img src="./assets/images/arrow.png" alt="" /></span>
+              </div>
+            </button>
+          </h2>
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <li routerLinkActive="active">
+                <a routerLink="/finance/revenue"> Ingresos</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/finance/expenses"> Egresos</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/finance/clinic-balance">
+                  Balance de la Clínica</a
+                >
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/finance/patience-balance"
+                  >Balance por paciente
+                </a>
+              </li>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              routerLinkActive="set-color-bg"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo"
+              aria-expanded="false"
+              aria-controls="flush-collapseTwo"
+            >
+              <div
+                class="one-box-1"
+                routerLink="/inventory/medication-material"
+              >
+                <span>
+                  <img src="./assets/images/Inventario.png" alt=""
+                /></span>
+                <span style="margin-left: 10px"> Inventario</span>
+              </div>
+              <div class="two-box-2">
+                <span><img src="./assets/images/arrow.png" alt="" /></span>
+              </div>
+            </button>
+          </h2>
+          <div
+            id="flush-collapseTwo"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <li routerLinkActive="active">
+                <a routerLink="/inventory/medication-material"> Medicamentos</a>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/inventory/general-stock"> Almacén General</a>
+              </li>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" *ngIf="!isNurse()">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseThree"
+              aria-expanded="false"
+              aria-controls="flush-collapseThree"
+              routerLinkActive="set-color-bg"
+            >
+              <div class="one-box-1" 
+              routerLink="/nursing"
+              >
+                <span>
+                  <img src="./assets/images/Engermería.png" alt=""
+                /></span>
+                <span style="margin-left: 10px"> Enfermeria </span>
+              </div>
+            </button>
+          </h2>
+        </div>
+      </div>
+      <div class="main-nav" routerLinkActive="set-color-bg" *ngIf="!isNurse()">
+        <a routerLink="/email-marketing">
+          <div class="img-text">
+            <img src="./assets/images/mail.png" alt="" />
+            <span style="margin-left: 10px">Email Marketing</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="main-nav" *ngIf="!isNurse()">
+        <a href="ESTADISTICAS.html">
+          <div class="img-text">
+            <img src="./assets/images/es.png" alt="" />
+            <span style="margin-left: 10px">Estadísticas</span>
+          </div>
+        </a>
+      </div>
+      <div class="main-nav" *ngIf="!isNurse()">
+        <div class="img-text">
+          <img src="./assets/images/co.png" alt="" />
+          <span style="margin-left: 10px">Comisiones</span>
+        </div>
+      </div>
+      <div class="main-nav" *ngIf="!isNurse()">
+        <div class="img-text">
+          <img src="./assets/images/pa.png" alt="" />
+          <span style="margin-left: 10px">Paquetes</span>
+        </div>
+      </div>
+      <div class="main-nav" routerLinkActive="set-color-bg">
+        <a routerLink="/configuration">
+          <div class="img-text">
+            <img src="./assets/images/co.png" alt="" />
+            <span style="margin-left: 10px">Configuración</span>
+          </div>
+        </a>
+      </div>
+      <div class="main-nav"  routerLinkActive="set-color-bg" *ngIf="isNurse()">
+        <a routerLink="/nursing-sheet">
+          <div class="img-text">
+            <img src="./assets/images/me.png" alt="">
+            <span style="margin-left: 10px;">Hoja de Enfermería</span>
+          </div>
+        </a>
+      </div>
+      <div class="main-nav" routerLinkActive="set-color-bg" *ngIf="isNurse()">
+        <a  routerLink="/nursing-kardex">
+                    <div class="img-text">
+                        <img src="./assets/images/medicine.png" alt="">
+                        <span style="margin-left: 10px;">Kardex de Enfermería</span>
+                    </div>
+        </a>
+                </div>
+    </div>
+  </div>
+</section>

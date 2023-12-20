@@ -1,0 +1,45 @@
+.daterangepicker {
+  position: relative;
+  width: 100%;
+}
+.daterangepicker .drp-calendar {
+  width: 50%;
+  max-width: none;
+  float: left !important;
+  clear: none !important;
+}
+.available-slot {
+  background-color: #f7d4be;
+  padding: 10px;
+  height: 100%;
+  border: 0;
+}
+.booked {
+  border: 0;
+  text-transform: capitalize;
+  background-color: #ffa629;
+  padding: 10px;
+  height: 100%;
+}
+
+th {
+  padding-right: 15px;
+  text-align: center;
+}
+thead {
+  th {
+    text-transform: capitalize;
+    padding: 20px 10px;
+  }
+}
+
+tbody th {
+  padding: 0 10px 10px;
+  vertical-align: baseline;
+}
+app-loader {
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

@@ -1,0 +1,3 @@
+code,description,description_center,batch,warehouse,material_type,location,available_stock,unit_of_measure,entry_date_warehouse,expiry_date,cost,public_price,,,,,,,,,
+code123,test,test123,2023,LA,TEST,TEST,333,MG,2023-09-19,2023-09-19,1333,12,,,,,,12/05/2023,19/09/2026,232,500
+code124,test,test123,2023,LA,TEST,TEST,333,NG,2023-09-20,2023-09-20,33,12,,,,,,12/05/2023,19/09/2026,232,500

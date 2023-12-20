@@ -1,0 +1,25 @@
+.input-group .form-control {
+    height: inherit;
+}
+button {
+    min-width: 200px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    min-height: 47px;
+    border: 0px;
+}
+.text-danger {
+    color: #34367f !important;
+  }
+textarea {
+border-radius: 5px;
+border: 1px solid #ced4da;
+background: #fff;
+width: 100%;
+}
+textarea:focus-visible {
+    outline: none;
+  }

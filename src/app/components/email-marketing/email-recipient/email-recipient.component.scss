@@ -1,0 +1,30 @@
+.form-two {
+    padding: 20px 0;
+}
+ngx-select {
+  padding: 0  40px 0 0px !important;
+}
+ngx-select ::ng-deep .form-control {
+  border: 0;
+}
+ngx-select ::ng-deep .form-control:hover {
+  background-color: transparent;
+}
+ngx-select ::ng-deep .form-control:focus {
+  border: 0;
+  box-shadow: none;
+}
+.ngx-select__toggle {
+  height: auto;
+}
+ngx-select ::ng-deep .ngx-select__toggle-buttons {
+  display: none;
+}
+ngx-select ::ng-deep .ngx-select__toggle {
+  height: 48px !important;
+}
+ngx-select ::ng-deep  .ngx-select__selected-single span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

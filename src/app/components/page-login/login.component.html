@@ -1,0 +1,53 @@
+<header>
+  <nav class="navbar-1">
+      <div class="container-full">
+          <div class="nav">
+              <div class="logo">
+                  <img src="/assets/images/logo.png" alt="">
+              </div>
+          </div>
+      </div>
+  </nav>
+</header>
+  <!-- section one  -->
+<section class="mt-5 pt-5 h-100">
+  <div class="container h-100 d-flex justify-content-center  flex-column">
+    <div class="">
+        <h4 class="Agenda text-center"><span>Login</span></h4>
+        <img src="" alt="">
+    </div>
+    <p *ngIf="errorMessage" class="text-danger">{{errorMessage}}</p>
+
+      <div class="row justify-content-center">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-8">
+          <div class="">
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control rounded-0" formControlName="email" id="email" placeholder="Email">                  
+
+                <div *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched" class="text-danger">
+                  Email is required and should be a valid email address.
+                </div>
+                
+                <!-- <div class="invalidText fw-bold mt-1 mb-2 m-0 alert alert-danger text-start text-danger p-1 m-0" 
+                    *ngIf="(submitted || myForm.controls['email'].touched) && myForm.controls['email']?.errors?.required">Email is required.
+                </div> -->
+                <!-- <div class="invalidText fw-bold mt-1 mb-2 m-0 alert alert-danger text-start text-danger p-1 m-0" 
+                    *ngIf="(submitted || myForm.controls['email'].touched) && myForm.controls['email']?.errors?.pattern">Email format is incorrect.
+                </div> -->
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control rounded-0" formControlName="password" id="password" placeholder="Password">
+                <div *ngIf="myForm.get('password')?.invalid && myForm.get('password')?.touched" class="text-danger">
+                  Password is required.
+                </div>
+              </div>              
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+      </div>
+      </div>
+  </div>
+</section>

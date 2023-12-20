@@ -1,0 +1,403 @@
+<div class="">
+  <!-- heading section  -->
+  <section class="heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-4">
+          <div class="text">
+            <h4>Kardex De Enfermería</h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- heading section close -->
+  <section class="table-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 ">
+                <div class="s-box">
+                    <label for="">ID de expediente</label>
+                    <input type="text" name="" id="" class="form-input" placeholder="" (change)="onfileIdChange($event)" [(ngModel)]="patientForm.expediente_id">
+                </div>
+
+            </div>
+            <div class="col-lg-7 ">
+                <div class="s-box">
+                    <label for="">Nombre Completo:</label>
+                    <input type="text" name="" class="form-input" placeholder="Nombre completo del paciente" [(ngModel)]="patientForm.fullname" readonly>
+
+                </div>
+
+            </div>
+            <div class="col-lg-3 ">
+                <div class="s-box">
+                    <p for="">Sexo</p>
+                    <label for="Hombre">Hombre</label>
+                    <input type="radio" id="Hombre" name="gender" value="1" class="radio-btn" 
+                    [checked]="patientForm.gender == 1"
+                    (change)="patientForm.gender = 1; onChangeInput($event)"
+                    >
+
+                    <label for="Mujer">Mujer</label>
+                    <input type="radio" id="Mujer" name="gender" value="2" class="radio-btn" 
+                    [checked]="patientForm.gender == 2"
+                    (change)="patientForm.gender = 2; onChangeInput($event)"
+                    >
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-xs-12 col-sm-12">
+              <span class="Fecha"> Fecha de nacimiento:</span>
+              <div class="row">
+                  <div class="col-lg-3 ">
+                      <input type="text" placeholder="DD" name="" id=""  class="form-input-1" [value]="dob?.day" readonly>
+                  </div>
+                  <div class="col-lg-6  row">
+                      <input type="text" placeholder="MM" name="" id=""  class="form-input-1" [value]="dob?.month" readonly>
+                  </div>
+                  <div class="col-lg-3  ">
+                      <input type="text" placeholder="YYYY" name="" id=""  class="form-input-1" [value]="dob?.year" readonly>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="col-lg-7">
+            <div class="s-box">
+                <label for="">Diagnóstico</label>
+                <input type="text" name="" id="" class="i-put"
+                [(ngModel)]="patientForm.diagnosis"
+                (change)="onChangeInput($event)" 
+                >
+            </div>
+        </div>
+
+        <div class="col-lg-2 ">
+          <div class="s-box">
+              <p>Alergías</p>
+              <label for="Hombre">Si</label>
+              <input type="radio" id="Hombre" name="hasAllergies" value="true" class="radio-btn" 
+              [checked]="patientForm.allergies?.hasAllergy"
+                  (change)="patientForm.allergies.hasAllergy = true; onChangeInput($event)"
+              >
+              <label for="Mujer">No</label>
+              <input type="radio" id="Mujer" name="hasAllergies" value="false" class="radio-btn"
+              [checked]="!patientForm.allergies?.hasAllergy"
+                  (change)="patientForm.allergies.hasAllergy = false;onChangeInput($event)"
+                  >
+          </div>
+      </div>
+
+      <div class="col-lg-3 ">
+          <div class="s-box">
+              <label for="">Especificar Alergias</label>
+              <input type="text" name="" id="" class="i-put" 
+              [(ngModel)]="patientForm.allergies.specificAllergy"
+              (change)="onChangeInput($event)" 
+              >
+          </div>
+      </div>
+      <div class="col-lg-6 ">
+        <div class="s-box">
+            <label for="">Ubicación (Sala, consultorio, cama)</label>
+            <input type="text" name="" id="" class="i-put" 
+            [(ngModel)]="patientForm.location"
+            (change)="onChangeInput($event)" 
+            >
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="s-box">
+          <label for="">Dieta</label>
+          <input type="text" name="" id="" class="i-put" 
+          [(ngModel)]="patientForm.diet"
+          (change)="onChangeInput($event)" 
+
+          >
+      </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="s-box">
+        <label for="">Fórmula</label>
+        <input type="text" name="" id="" class="i-put" 
+        (change)="onChangeInput($event)" 
+
+        [(ngModel)]="patientForm.formula"
+        >
+    </div>
+</div>
+
+<div class="col-lg-4 ">
+  <div class="s-box">
+      <label for="">Médico tratante</label>
+      <input type="text" name="" id="" class="i-put" 
+      [(ngModel)]="doctorName"
+      readonly
+      >
+  </div>
+</div>
+
+
+
+        </div>
+        <form class="row ms-s mt-1" >
+            <h3 class="Medicamentos">Medicamentos</h3>
+            <div class="col-lg-2">
+                <div class="input-style-1">
+                    <label for="">Fecha</label>
+                    <input 
+                            type="text"
+                            name="daterangeInput"
+                            daterangepicker
+                            [options]="datePickerOptions"
+                            (selected)="onSelectDate($event)"
+                             id="date"
+                             [(ngModel)]="medicineForm.date"
+                             >
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="input-style-1">
+                    <label for="">Medicamento</label>
+                    <input type="text" name="medicine" id=""
+                    [(ngModel)]="medicineForm.medicine"
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-2">
+                <div class="input-style-1">
+                    <label for="">Dosis</label>
+                    <input type="text" name="dose" id="" 
+                    [(ngModel)]="medicineForm.dose"
+                    >
+                </div>
+
+            </div>
+
+            <div class="col-lg-2">
+                <div class="input-style-1">
+                    <label for="">Vía</label>
+                    <input type="text" name="via" id="" 
+                    [(ngModel)]="medicineForm.via"
+                    >
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-3">
+                <div class="input-style-1">
+                    <label for="">Observaciones</label>
+                    <input type="text" name="observation" id="" 
+                    [(ngModel)]="medicineForm.comment"
+                    >
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-2">
+                <div class="input-style-1">
+                    <li class="btn-color mt-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                            <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <span class="Agregar" (click)="onSubmitMedicineForm()"> Agregar</span>
+                    </li>
+                </div>
+            </div>
+
+          </form>
+    </div>
+</section>
+
+<section class="section-3">
+  <div class="container">
+      <!-- <h4>Plan Terapeútico</h4> -->
+      <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="table-4-style">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Fecha</th>
+                              <th>Nombre Enfermera/o</th>
+                              <th>Medicamento</th>
+                              <th>Dosis</th>
+                              <th>Via</th>
+                              <th>Hora</th>
+                              <th>Aplicado</th>
+                              <th>Observaciones</th>
+
+
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of patientForm.medicines">
+                          <td>{{item.date}}</td>
+                          <td>{{item.nurse.name}}</td>
+                          <td>{{item.medicine}}</td>
+                          <td>{{item.dose}}</td>
+                          <td>{{item.via}}</td>
+                          <td>{{item.appliedTime}}</td>
+                          <td>
+                              <img src="../../../assets/images/no-check.png" alt="" *ngIf="!item.applied" (click)="onApplied(item)">
+                              <img src="../../../assets/images/check.png" alt="" *ngIf="item.applied" >
+                          </td>
+                          <td>{{item.comment}}</td>
+                      </tr>
+                      <tr *ngIf="!patientForm.medicines.length">
+                        <td  colspan="8">No records added</td>
+                      </tr>
+
+                      </tbody>
+                  </table>
+
+              </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+</section>
+<section class="section-4-style">
+  <div class="container">
+      <h3 class="Cuidados"> Cuidados específicos de enfermería</h3>
+      <div class="row">
+          <div class="col-lg-10">
+              <div class="input-style-1">
+                  <input type="text" name="" id="" [(ngModel)]="nursingComment">
+              </div>
+
+          </div>
+          <div class="col-lg-2 col-2">
+              <div class="input-style-1">
+                  <li class="btn-color " style="">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                          <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                      <span class="Agregar" (click)="onSubmitNursingCommentForm()"> Agregar</span>
+                  </li>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+</section>
+<section class="section-3">
+  <div class="container">
+      <!-- <h4>Plan Terapeútico</h4> -->
+      <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="table-4-style">
+                  <table>
+
+                      <thead>
+                          <tr>
+                              <th>Fecha y hora</th>
+                              <th>Nombre Enfermera/o</th>
+                              <th>Cuidado específico</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let item of patientForm.nursingComment">
+                              <td>{{item.date}}</td>
+                              <td>{{item.nurse.name}}</td>
+                              <td>{{item.comment}}</td>
+                          </tr>
+                          <tr *ngIf="!patientForm.nursingComment.length">
+                            <td  colspan="3">No records added</td>
+                      </tbody>
+                  </table>
+
+              </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+</section>
+<section class="section-4-style">
+  <div class="container">
+      <h3 class="Cuidados">Soluciones parenterales y/u otros</h3>
+      <div class="row">
+          <div class="col-lg-10">
+              <label for="">Soluciones parenterales y/u otros</label>
+              <div class="input-style-1">
+                  <input type="text" name="" id="" [(ngModel)]="otherComments">
+              </div>
+
+          </div>
+          <div class="col-lg-2 col-2 mt-lg-4">
+              <div class="input-style-1">
+                  <li class="btn-color mt-3" style="">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                          <path d="M10.5 3V18M18 10.5H3" stroke="#34367F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                      <span class="Agregar" (click)="onSubmitOtherForm()"> Agregar</span>
+                  </li>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+</section>
+<section class="section-3">
+  <div class="container">
+      <!-- <h4>Plan Terapeútico</h4> -->
+      <div class="row mt-2">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="table-4-style">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Fecha y hora</th>
+                              <th>Nombre Enfermera/o</th>
+                              <th>Soluciones parenteral u/o otro</th>
+                              <th>Hora</th>
+                              <th>Aplicado</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let item of patientForm.others">
+                              <td>{{item.date}}</td>
+                              <td>{{item.nurse.name}}</td>
+                              <td>{{item.comment}}</td>
+                              <td>{{item.appliedTime}}</td>
+                              <td>
+                                <img src="../../../assets/images/no-check.png" alt="" *ngIf="!item.applied" (click)="onApplied(item)">
+                                <img src="../../../assets/images/check.png" alt="" *ngIf="item.applied">  
+                              </td>
+                          </tr>
+                          <tr *ngIf="!patientForm.others.length">
+                            <td  colspan="5">No records added</td>
+                          </tr>
+    
+                      </tbody>
+                  </table>
+
+              </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+</section>
+</div>

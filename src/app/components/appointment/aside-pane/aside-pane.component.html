@@ -1,0 +1,119 @@
+<section class="right-2">
+  <div
+    class="offcanvas offcanvas-end"
+    [ngClass]="{ show: !asideState.hidden }"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+        (click)="closeAside()"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <h3 class="Agendar-heading">Agendar nueva cita</h3>
+      <p class="Nombre" *ngIf="groupBy === 'room'">
+        <span class="Médico">Sala:</span>
+        {{ selectedSlotDetail?.room?.name }}
+      </p>
+      <p class="Nombre" *ngIf="groupBy === 'doctor'">
+        <span class="Médico">Médico:</span>
+        {{ selectedSlotDetail?.doctor?.name }}
+      </p>
+      <p class="Nombre">
+        <span class="Médico">Día:</span>
+        {{ moment(selectedSlotDetail?.date).format("dddd D [de] MMMM YYYY") }}
+      </p>
+      <p class="Nombre">
+        <span class="Médico">Horario:</span>
+        {{
+          moment(selectedSlotDetail?.slot?.startTime, "HH:mm").format("h:mm A")
+        }}
+      </p>
+      <form class="row" [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+        <div class="input-select">
+          <div class="row">
+            <div class="col-lg-10">
+              <label for="" id="Duración-1">Duración de la consulta</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                (change)="onDurationChange($event)"
+                formControlName="duration"
+              >
+                <option value="" selected>Duración</option>
+                <option value="15">15 min</option>
+                <option value="30">30 min</option>
+                <option value="60">60 min</option>
+                <option value="90">90 min</option>
+                <option value="120">120 min</option>
+                <option value="150">150 min</option>
+                <option value="180">180 min</option>
+                <option value="210">210 min</option>
+              </select>
+            </div>
+
+            <div class="col-lg-10">
+              <label for="" id="Duración-1">Nombre del paciente</label>
+              <ngx-select
+                class="form-select select_arrow"
+                [items]="patientList"
+                [placeholder]="'Nombre del paciente'"
+                formControlName="patient"
+              >
+              </ngx-select>
+            </div>
+            <div class="col-lg-10" *ngIf="groupBy === 'doctor'">
+              <label for="" id="Duración-1">Espacio/Sala </label>
+              <ngx-select
+                class="form-select select_arrow"
+                [items]="roomsList"
+                [placeholder]="'Espacio/Sala'"
+                formControlName="room"
+              >
+              </ngx-select>
+            </div>
+            <div class="col-lg-10" *ngIf="groupBy === 'room'">
+              <label for="" id="Duración-1">Médico </label>
+              <ngx-select
+                class="form-select select_arrow"
+                [items]="doctorList"
+                [placeholder]="'Médico'"
+                formControlName="doctor"
+                (selectionChanges)="onDoctorChange($event)"
+              >
+              </ngx-select>
+            </div>
+            <div class="col-lg-10">
+              <label for="" id="Duración-1">Servicio</label>
+              <ngx-select
+                class="form-select select_arrow"
+                [items]="serviceList"
+                [placeholder]="'Servicio'"
+                formControlName="service"
+              >
+              </ngx-select>
+            </div>
+            <div class="col-lg-10">
+              <label for="" id="Duración-1">Motivo de la consulta</label>
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                formControlName="description"
+              ></textarea>
+            </div>
+          </div>
+          <button class="AGENDAR-button" type="submit">AGENDAR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

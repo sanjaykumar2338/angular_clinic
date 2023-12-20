@@ -1,0 +1,89 @@
+<div class="heading">
+    <div class="col-lg-12   edit-box ">
+        <div class="btn">
+            <button class="Exportar padding">Exportar a excel</button>
+        </div>
+    </div>
+    <div class="">
+        <div class="col-lg-12 d-flex justify-content-lg-end">
+          <div class="input-style date-icon">
+            <span> </span>
+            <!-- {{dateRange | json}} -->
+            <input
+              type="text"
+              name="daterangeInput"
+              daterangepicker
+              [options]="datePickerOptions"
+              (selected)="selectedDate($event)"
+            />
+          </div>
+        </div>
+      </div>
+</div>
+
+<section class="cards">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 left-padding ">
+                <div class="card-style">
+                    <div class="text">
+                        <p class="p-1">Ventas</p>
+                        <p class="p-2">Ver detalle</p>
+                    </div>
+                    <h3> <strong> 
+                  {{ data.concept | currency : "USD" : "symbol" : "1.2-2" }}
+
+                    </strong> </h3>
+
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-md-12 left-padding-1  ">
+                <div class="card-style">
+                    <div class="text">
+                        <p class="p-1">Gastos</p>
+                        <p class="p-2">Ver detalle</p>
+                    </div>
+                    <h3> <strong>
+                  {{ data.expenses | currency : "USD" : "symbol" : "1.2-2" }}
+                    </strong> </h3>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-6 left-padding  ">
+                <div class="img-box">
+                    <h2>Principales ingresos</h2>
+                    <div class="pic">
+                    <div class="chart-container">
+                    <canvas id="incomeChart"></canvas>
+                    </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col-lg-6 left-padding-1 ">
+                <div class="img-box">
+                    <h2>Principales gastos</h2>
+                    <div class="pic">
+                        <div class="chart-container">
+                            <canvas id="expenseChart"></canvas>
+                            </div>
+                            </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

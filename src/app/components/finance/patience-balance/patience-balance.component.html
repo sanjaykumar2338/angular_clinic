@@ -1,0 +1,109 @@
+<div class="">
+  <section class="heading">
+    <div class="container">
+
+      <div class="row border-btm">
+        <div class="col-lg-6 col-sm-4">
+          <div class="text">
+            <h4 class="set-margin">Balance Del Paciente
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-lg-12 e-style">
+            <button class="Exportar" (click)="exportToExcel()"> Exportar a excel</button>
+            <div class="form-edit-style">
+                <form class="d-flex" role="search">
+                    <input type="text" placeholder="BUSCAR" [(ngModel)]="searchText" name="searchText">
+                    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                </form>
+            </div>
+        </div>
+        <div class="col-12 mt-2">
+          <div class="tools">
+            <select
+              class="form-select float-right"
+              aria-label="Default select example"
+              [(ngModel)]="sortBy"
+            >
+              <option selected value="">Ordenar por:</option>
+              <option value="name">Paciente</option>
+              <option value="doctor">Médico tratante</option>
+              <option value="paid_amount">Pagado</option>
+              <option value="pending_amount">Pendiente</option>
+            </select>
+          </div>
+        </div>
+
+    </div>
+
+
+      <section class="table-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-4-style">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Expediente</th>
+                                    <th>Paciente</th>
+                                    <th>Médico Tratante</th>
+                                    <th>Importe</th>
+                                    <th>Pagado</th>
+                                    <th>Pendiente</th>
+                                    <th>Ver
+                                        Detalles
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let patient of filteredRecords | paginate : { itemsPerPage: 10, currentPage: page };">
+                                    <td>{{patient.file}}</td>
+                                    <td>{{patient.name}}</td>
+                                    <td>{{patient.doctor}}</td>
+                                    <td>{{patient.total_amount | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                    <td>{{patient.paid_amount | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                    <td [style.color]="patient.pending_amount ? '#FF6359' : ''">{{patient.pending_amount ? (patient.pending_amount | currency : "USD" : "symbol" : "1.2-2") : '-'}}</td>
+                                    <td>
+                                        <img src="../../../../assets/images/view-1.png" alt="" (click)="showSinglePatient(patient.patient)">
+                                    </td>
+
+                                </tr>
+                                <tr *ngIf="!filteredRecords.length && !showLoader" class="text-center">
+                                  <td colspan="7">No se han encontrado resultados</td>
+                                </tr>
+                                <tr *ngIf="showLoader">
+                                  <td colspan="7">
+                                    <div class="row">
+                                      <div class="col-12 text-end">
+                                        <app-loader></app-loader>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-12 text-end">
+                        <pagination-controls
+                          (pageChange)="page = $event"
+                        ></pagination-controls>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    </div>
+  </section>
+</div>

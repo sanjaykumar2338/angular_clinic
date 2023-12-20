@@ -1,0 +1,39 @@
+<section class="right-2" id="form-right-side">
+  <div
+    class="offcanvas offcanvas-end"
+    [ngClass]="{ show: !viewAside.hidden }"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+        (click)="closeAside()"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <p class="Caja">{{viewAside.material.description}}</p>
+      <p class="no-1"><span class="Código">Código:</span> {{viewAside.material.code}}</p>
+      <p class="no-1"><span class="Código">Centro de distribución:</span> {{viewAside.material.description_center}}</p>
+      <p class="no-1"><span class="Código">Lote:</span> {{viewAside.material.batch}}</p>
+      <p class="no-1"><span class="Código">Almacén:</span> {{viewAside.material.warehouse}}</p>
+      <p class="no-1"><span class="Código">Tipo de material:</span> {{viewAside.material.material_type}}</p>
+      <p class="no-1"><span class="Código">Ubicación:</span> {{viewAside.material.code}}</p>
+      <p class="no-1"><span class="Código">Stock disponible:</span> <span style="color: #00B050; font-weight: 700;"> {{viewAside.material.available_stock}} </span></p>
+      <p class="no-1"><span class="Código">Unidad de Medida:</span> {{viewAside.material.unit_of_measure}}</p>
+      <p class="no-1"><span class="Código">Fecha de Caducidad:</span> <br /> {{viewAside.material.expiry_date}}</p>
+      <p class="no-1"><span class="Código">Fecha de entrada al almacen:</span> <br /> {{viewAside.material.entry_date_warehouse}}</p>
+      <p class="no-1"><span class="Código">Costo:</span> {{viewAside.material.cost | currency : "USD" : "symbol" : "1.2-2"}}</p>
+      <p class="no-1"><span class="Código">Precio al público:</span> {{viewAside.material.public_price | currency : "USD" : "symbol" : "1.2-2"}}</p>
+      
+      <button class=" PAGAR mt-5" (click)="closeAside()"> REGRESAR</button>
+  </div>
+    
+  </div>
+</section>

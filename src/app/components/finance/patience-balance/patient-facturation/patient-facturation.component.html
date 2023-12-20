@@ -1,0 +1,164 @@
+<section class="form-section">
+    <div class="container">
+        <h4 class="Datos">Datos de facturación</h4>
+        <form [formGroup]="billingForm">
+            <div class="row mb-3">
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="name">Nombre / Razón Social:</label>
+                  <input type="text" id="name" formControlName="name" class="form-control" required />
+                  <div *ngIf="billingForm.get('name').invalid && billingForm.get('name').touched" class="text-danger">
+                    Nombre / Razón Social es obligatorio.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="rfc">RFC:</label>
+                  <input type="text" id="rfc" formControlName="rfc" class="form-control" required />
+                    <div *ngIf="billingForm.get('rfc').invalid && billingForm.get('rfc').touched" class="text-danger">
+                        RFC es obligatorio.
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="use_of_invoice">Uso de la factura:</label>
+                  <select id="use_of_invoice" formControlName="use_of_invoice" class="form-select" aria-label="Default select example">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                    <div *ngIf="billingForm.get('use_of_invoice').invalid && billingForm.get('use_of_invoice').touched" class="text-danger">
+                        Uso de la factura es obligatorio.
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="fiscal_regime">Regimen fiscal:</label>
+                  <select id="fiscal_regime" formControlName="fiscal_regime" class="form-select" aria-label="Default select example">
+                    <option value="" disabled selected>Seleccione</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <div *ngIf="billingForm.get('fiscal_regime').invalid && billingForm.get('fiscal_regime').touched" class="text-danger">
+                    Regimen fiscal es obligatorio.
+                </div>
+              </div>
+            </div>
+            </div>
+            <!-- Additional Email Fields -->
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="email">Correo electrónico:</label>
+                  <input type="email" id="email" formControlName="email" class="form-control" required />
+                    <div *ngIf="billingForm.get('email').invalid && billingForm.get('email').touched" class="text-danger">
+                        Correo electrónico es obligatorio.
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="email_2">Correo electrónico opción 2:</label>
+                  <input type="email" id="email_2" formControlName="email_2" class="form-control" />
+                    <div *ngIf="billingForm.get('email_2').invalid && billingForm.get('email_2').touched" class="text-danger">
+                        Correo electrónico opción 2 es obligatorio.
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="email_3">Correo electrónico opción 3:</label>
+                  <input type="email" id="email_3" formControlName="email_3" class="form-control" />
+                  <div *ngIf="billingForm.get('email_3').invalid && billingForm.get('email_3').touched" class="text-danger">
+                    Correo electrónico opción 3 es obligatorio.
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input">
+                  <label for="postal_code">Código Postal:</label>
+                  <input type="text" id="postal_code" formControlName="postal_code" class="form-control" required />
+                    <div *ngIf="billingForm.get('postal_code').invalid && billingForm.get('postal_code').touched" class="text-danger">
+                        Código Postal es obligatorio.
+                    </div>
+                </div>
+              </div>
+            </div>
+          
+            <h5 class="Agregar" (click)="onSubmit()">Agregar datos opcionales</h5>
+          </form>
+          
+          <section class="table-3">
+            <div class="container">
+    
+                <p>Facturas</p>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="table-edit">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Fecha
+                                        </th>
+                                        <th> Folio </th>
+                                        <th>
+                                            Concepto
+                                        </th>
+                                        <th>
+                                            Subtotal
+                                        </th>
+                                        <th>
+                                            IVA
+                                        </th>
+                                        <th>
+                                            Total
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of billingList | paginate : { itemsPerPage: 10, currentPage: page };">
+                                        <td>{{item.date}}</td>
+                                        <td>{{item.number}}</td>
+                                        <td>{{item.description}}</td>
+                                        <td>{{item.subtotal | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                        <td>{{ item.vat | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                        <td>{{item.total | currency : "USD" : "symbol" : "1.2-2" }}</td>
+                                        <td class="edit">{{item.status}} </td>
+                                    </tr>
+                                    <tr *ngIf="!billingList.length && !showLoader" class="text-center">
+                                        <td colspan="11">No se han encontrado resultados</td>
+                                      </tr>
+                                      <tr *ngIf="showLoader">
+                                        <td colspan="11">
+                                          <div class="row">
+                                            <div class="col-12 text-end">
+                                              <app-loader></app-loader>
+                                            </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-end">
+                              <pagination-controls
+                                (pageChange)="page = $event"
+                              ></pagination-controls>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

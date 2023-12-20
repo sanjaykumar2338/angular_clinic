@@ -1,0 +1,124 @@
+<section class="heading">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-12 ">
+                <div class="d-flex flex-wrap">
+                    <div class="col-lg-6 col-sm-12  col-12  ">
+                        <div class="text">
+                            <h4 class="set-margin">¿A quíen quieres enviar la campaña?</h4>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="form-two eml-form">
+    <div class="container-mx">
+        <form [formGroup]="recipientForm" autocomplete="off">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="input">
+                    <label for="">Pacientes:</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="patient_with">
+                        <option selected value="with_appointment">Con cita reservada</option>
+                        <option value="without_appointment">Sin cinta reservada</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 blue_date">
+                <div class="input-edit">
+                    <label for="">Fecha de la cita desde:</label>
+                    <!-- <input type="date"> -->
+                    <input type="text" name="daterangeInput" daterangepicker (applyDaterangepicker)="selectAppointFrom($event)"
+                        [options]="datePickerOptions" placeholder="dd/mm/aaaa"  autocomplete="off"/>
+
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <div class="input-edit blue_date">
+                    <label for="">Fecha de la cita hasta:</label>
+                    <!-- <input type="date"> -->
+                    <input type="text" name="daterangeInput1" daterangepicker (applyDaterangepicker)="selectAppointTo($event)"
+                        [options]="datePickerOptions1" placeholder="dd/mm/aaaa"  autocomplete="off" />
+                </div>
+
+            </div>
+
+
+
+
+            <div class="col-lg-2 ">
+                <div class="input-edit">
+                    <label for="">Edad desde:</label>
+                    <input type="number" placeholder="0 años" formControlName="age_from">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row mt-3">
+
+            <div class="col-lg-2 ">
+                <div class="input-edit">
+                    <label for="">Edad hasta:</label>
+                    <input type="number" placeholder="0 años"  formControlName="age_to">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="input">
+                    <label for="">Especialidad:</label>
+                    <ngx-select class="form-select select_arrow" [items]="specialtyList"
+                        [placeholder]="'Todas las especialidades'"
+                        (selectionChanges)="onSelectionChanges($event)"
+                        formControlName="specialty">
+                        <ng-template ngx-select-option-not-found>No se han encontrado resultados</ng-template>
+                    </ngx-select>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="input">
+                    <label for="">Especialista:</label>
+                    <ngx-select class="form-select select_arrow" [items]="specialistList"
+                    [placeholder]="'Todos los especialistas'"
+                    formControlName="specialist"
+                    >
+                    <ng-template ngx-select-option-not-found>No se han encontrado resultados</ng-template>
+
+                </ngx-select>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="input">
+                    <label for="">Servicio:</label>
+                    <ngx-select class="form-select select_arrow" [items]="specialtyList"
+                        [placeholder]="'Todos los servicios'" 
+                    formControlName="services"
+                    
+                        
+                        >
+                        <ng-template ngx-select-option-not-found>No se han encontrado resultados</ng-template>
+                    </ngx-select>
+                </div>
+            </div>
+
+        </div>
+    </form>
+        <div class="text-btn">
+            <div class="text-inner">
+                <h6 *ngIf="showCriteria">Hemos encontrado {{patienceCriteria.total}} pacientes con el criterio de selección. </h6>
+                <button (click)="navigateToCreateCampaign()"> Enviar a todos</button>
+                <button > Seleccionar destinatarios</button>
+
+            </div>
+        </div>
+    </div>
+</section>

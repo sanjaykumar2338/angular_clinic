@@ -1,0 +1,125 @@
+<div class="heading">
+  <div class="col-lg-12   edit-box ">
+      <div class="btn">
+          <button class="Exportar padding" (click)="exportToExcel()">Exportar a excel</button>
+      </div>
+  </div>
+  <div class="">
+      <div class="col-lg-12 d-flex justify-content-lg-end">
+        <div class="input-style date-icon">
+          <span> </span>
+          <input
+            type="text"
+            name="daterangeInput"
+            daterangepicker
+            [options]="datePickerOptions"
+            (selected)="selectedDate($event)"
+          />
+        </div>
+      </div>
+    </div>
+</div>
+
+  <section class="table-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="style-box">
+            <table>
+              <thead>
+                  <th class="ingresos">Ingresos</th>
+
+                    <th *ngFor="let month of income[0]?.months">
+                    {{shortenMonthName(month.month)}} - {{month.year.toString().slice(-2)}}</th>
+                  <th>Totales</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let revenue of income">
+                  <td>{{revenue.concept}}</td>
+                  <td *ngFor="let month of revenue.months">
+                    {{ month.amount | currency : "USD" : "symbol" : "1.2-2" }}
+                  </td>
+                  <td>{{revenue.total | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                </tr>
+                <tr>
+                  <td
+                    style="
+                      color: #34367f;
+                      font-family: 'Montserrat';
+                      font-size: 16px;
+                      font-weight: 800;
+                      border-bottom: 0px;
+                    "
+                  >
+                    Ingresos totales
+                  </td>
+                  <td *ngFor="let item of totalIncomePerMonth">{{item.total | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="table-style-2">
+            <table>
+              <thead>
+                <tr>
+                  <th class="gastos">Gastos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let expense of expenses">
+                  <td>{{expense.category}}</td>
+                  <td *ngFor="let month of expense.months">
+                    {{ month.amount | currency : "USD" : "symbol" : "1.2-2" }}
+                  </td>
+                  <td>{{expense.total | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                </tr>
+
+                <tr>
+                  <td class="g-2" 
+                  style="
+                  color: #34367f;
+                  font-family: 'Montserrat';
+                  font-size: 16px;
+                  font-weight: 800;
+                  border-bottom: 0px;
+                "
+                >Gastos totales</td>
+                  <td *ngFor="let item of totalExpensePerMonth">{{item.total | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+              </tfoot>
+            </table>
+            <h5 class="style">Utilidad</h5>
+            <table>
+              <td>
+                Utilidad operativa<br />
+                antes de impuestos
+              </td>
+              <td *ngFor="let month of profitBeforeTaxes">{{month.amount | currency : "USD" : "symbol" : "1.2-2"}}</td>
+              <!-- <td>$615,000</td>
+              <td>$638,300</td>
+              <td>$600,000</td>
+              <td>$615,000</td>
+              <td>$638,300</td>
+              <td>$600,000</td>
+              <td>$615,000</td>
+              <td>$638,300</td>
+              <td>$600,000</td>
+              <td>$638,300</td>
+              <td>$6,438,300</td> -->
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

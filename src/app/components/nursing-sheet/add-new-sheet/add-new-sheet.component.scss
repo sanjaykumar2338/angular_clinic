@@ -1,0 +1,17 @@
+.s-box {
+    margin-bottom: 10px;
+}
+input[type="time" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+}
+
+.scroller {
+    justify-content: start;
+    max-width: 282px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow: scroll;
+}

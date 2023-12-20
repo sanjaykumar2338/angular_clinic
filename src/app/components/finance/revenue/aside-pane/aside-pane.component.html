@@ -1,0 +1,229 @@
+<section class="right-2">
+  <div
+    class="offcanvas offcanvas-end"
+    [ngClass]="{ show: !asideState.hidden }"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+        (click)="closeAside()"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <h3>Registro de pago</h3>
+
+      <form class="row" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+        <!-- <ng-container formArrayName="patient">
+          <div class="col-lg-12">
+            <div
+              class="row mt-3"
+              *ngFor="
+                let item of paymentForm.get('patient').controls;
+                let i = index
+              "
+            >
+              <div class="col-lg-10" [formGroupName]="i">
+                <ngx-select
+                  class="form-select select_arrow"
+                  [items]="patientList"
+                  [placeholder]="'Nombre del paciente'"
+                  formControlName="id"
+                >
+                </ngx-select>
+                <div
+                  *ngIf="item.get('id').invalid && item.get('id').touched"
+                  class="text-danger"
+                >
+                  Paciente is required.
+                </div>
+              </div>
+              <div
+                class="col-lg-2 d-flex align-items-center"
+                *ngIf="paymentForm.get('patient').length - 1 === i"
+              >
+                <button class="plus" (click)="addNewPatient()">+</button>
+              </div>
+
+              <div
+                class="col-lg-2 d-flex align-items-center"
+                *ngIf="paymentForm.get('patient').length - 1 !== i"
+              >
+                <button class="minus" (click)="removePatient(i)">-</button>
+              </div>
+            </div>
+          </div>
+        </ng-container> -->
+        <div class="col-lg-10 mt-3">
+          <ngx-select
+            class="form-select select_arrow"
+            [items]="patientList"
+            [placeholder]="'Nombre del paciente'"
+            formControlName="patient"
+          >
+          </ngx-select>
+          <div
+            *ngIf="
+              paymentForm.get('patient').invalid &&
+              paymentForm.get('patient').touched
+            "
+            class="text-danger"
+          >
+          Paciente is required.
+          </div>
+        </div>
+        <div class="col-lg-10 mt-3">
+          <ngx-select
+            class="form-select select_arrow"
+            [items]="doctorList"
+            [placeholder]="'Nombre del médico'"
+            formControlName="doctor"
+          >
+          </ngx-select>
+          <div
+            *ngIf="
+              paymentForm.get('doctor').invalid &&
+              paymentForm.get('doctor').touched
+            "
+            class="text-danger"
+          >
+            Médico is required.
+          </div>
+        </div>
+
+        <div class="col-lg-10">
+          <select
+            class="form-select select_arrow"
+            id="edit-select"
+            aria-label="Default select example"
+            formControlName="payment_purpose"
+            #paymentPurpose
+            (change)="onChangePaymentPurpose(paymentPurpose)"
+          >
+            <option selected value="">
+              <span style="color: gray !important">Concepto</span>
+            </option>
+            <option
+              *ngFor="let purpose of paymentpurposeOptions; let i = index"
+              [value]="purpose.id"
+            >
+              {{ purpose.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              paymentForm.get('payment_purpose').invalid &&
+              paymentForm.get('payment_purpose').touched
+            "
+            class="text-danger"
+          >
+            Concepto is required.
+          </div>
+        </div>
+        <!-- <div class="col-lg-10">
+          <input type="text" name="" id="blank" />
+        </div> -->
+
+        <div class="col-lg-10" *ngIf="enableInventory">
+          <!--  -->
+          <ngx-select
+            [items]="inventoryItems"
+            [placeholder]="'inventarios de medicamentos'"
+            class="form-select select_arrow"
+            formControlName="inventory_id"
+            (selectionChanges)="onSelectionChanges($event)"
+          >
+          </ngx-select>
+        </div>
+
+        <div class="col-lg-5">
+          <input
+            type="text"
+            name=""
+            class="width"
+            placeholder=" Precio:"
+            formControlName="price"
+          />
+          <div
+            *ngIf="
+              paymentForm.get('price').invalid &&
+              paymentForm.get('price').touched
+            "
+            class="text-danger"
+          >
+            Precio is required and should be a positive number.
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <input
+            type="text"
+            name=""
+            class="width"
+            placeholder=" Cantidad Pagada:"
+            formControlName="amount_paid"
+          />
+          <div
+            *ngIf="
+              paymentForm.get('amount_paid').invalid &&
+              paymentForm.get('amount_paid').touched
+            "
+            class="text-danger"
+          >
+            Cantidad Pagada is required and should be a positive number.
+          </div>
+        </div>
+
+        <div class="col-lg-10">
+          <select
+            class="form-select select_arrow"
+            id="edit-select"
+            aria-label="Default select example"
+            aria-placeholder="Método de pago"
+            formControlName="payment_method"
+          >
+            <option value="" selected id="color-add">
+              <span style="color: gray !important">Método de pago</span>
+            </option>
+            <option
+              *ngFor="let method of paymentMethods; let i = index"
+              [value]="method.id"
+            >
+              {{ method.name }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              paymentForm.get('payment_method').invalid &&
+              paymentForm.get('payment_method').touched
+            "
+            class="text-danger"
+          >
+            Método de pago is required.
+          </div>
+        </div>
+        <div class="col-lg-10">
+          <label
+            for=""
+            style="color: #a7a9ac; padding-bottom: 2px; font-size: 16px"
+            >Comentarios</label
+          >
+          <textarea
+          type="text"
+          rows="5"
+          name=""
+          class="width"
+          style="height: auto"
+          formControlName="comments"></textarea>
+          <button class="PAGAR" type="submit">PAGAR</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

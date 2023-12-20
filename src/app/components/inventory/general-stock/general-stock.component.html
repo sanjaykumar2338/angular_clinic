@@ -1,0 +1,142 @@
+<div class="">
+    <section class="heading">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-12 ">
+                    <div class="d-flex flex-wrap">
+                        <div class="col-lg-6 col-sm-4  ">
+                            <div class="text">
+                                <h4 class="set-margin">Almacén general</h4>
+                            </div>
+                        </div>
+    
+    
+                        <div class="col-lg-6 set-center   edit-box ">
+                            <li (click)="showAside()">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Agregar </span>
+                            </li>
+    
+    
+                            <li style="background-color: #ED7023;" (click)="importFile()">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Importar desde archivo csv </span>
+                                <input type="file"  #fileInput (change)="onFileSelected($event)" accept=".xlsx, .xls" hidden />
+                            </li>
+                            <a href="../../../../assets/sample/sample_of_materials.xlsx" download="sample_of_materials.xlsx">Descargar archivo muestra</a>
+    
+    
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </section>
+
+    <div class="serch-bar-add">
+        <div class="col-lg-12 e-style">
+            <button class="Exportar" (click)="exportToExcel()"> Exportar a excel</button>
+            <div class="form-edit-style">
+                <form class="d-flex" role="search">
+                    <input type="text" placeholder="BUSCAR" name="searchText" [(ngModel)]="searchText">
+                    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="table-6">
+        <div class="container">
+            <div class="row">
+
+            <div class="col-12 float-right">
+
+                    <div class="tools col-3 float-right row">
+                        <select
+                          class="form-select float-right"
+                          aria-label="Default select example"
+                          [(ngModel)]="sortBy"
+                        >
+                          <option selected value="">Ordenar por:</option>
+                          <option value="code">Código</option>
+                          <!-- <option value="expiry_date">Caducidad</option> -->
+                          <option value="batch">Lote</option>
+                          <option value="available_stock">Stock disponible</option>
+                        </select>
+                      </div>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-6-style">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre
+                                    </th>
+                                    <th>Lote</th>
+                                    <th>Almacén</th>
+                                    <!-- <th>Caducidad</th> -->
+                                    <th>Costo</th>
+                                    <th>Precio</th>
+                                    <th>Stock
+                                        Disponible</th>
+                                    <th>Resurtir</th>
+                                    <th>Ver</th>
+                                    <th>Borrar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of filteredRecords  | paginate : { itemsPerPage: 10, currentPage: page };" >
+                                    <td>{{item.code}}</td>
+                                    <!-- <td><input type="checkbox" style="width: 40px;height: 20px;"></td> -->
+                                    <td>{{item.description}}</td>
+                                    <td>{{item.batch}}</td>
+                                    <td>{{item.warehouse}}</td>
+                                    <!-- <td>{{item.expiry_date}}</td> -->
+                                    <td>{{item.cost | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                    <td>{{item.public_price | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                    <td>{{item.available_stock}}</td>
+
+                                    <td><img src="../../../../assets/images/plus.png" alt="" (click)="restockMaterial(item)"></td>
+                                    <td><img src="../../../../assets/images/view-1.png" alt="" (click)="onViewMaterial(item)"></td>
+                                    <td><img src="../../../../assets/images/trash 1.png" alt="" (click)="deleteMaterial(item.id)"></td>
+                                </tr>
+                                <tr *ngIf="!filteredRecords.length && !showLoader" class="text-center">
+                                    <td colspan="11">No se han encontrado resultados</td>
+                                  </tr>
+                                  <tr *ngIf="showLoader">
+                                    <td colspan="11">
+                                      <div class="row">
+                                        <div class="col-12 text-end">
+                                          <app-loader></app-loader>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 text-end">
+                          <pagination-controls
+                            (pageChange)="page = $event"
+                          ></pagination-controls>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<add-general-stock
+[asideState]="asideState"
+(onInventorySuccess)="getGeneralStock()"
+></add-general-stock>
+<view-general-stock [viewAside]="viewAside"></view-general-stock>
+<restock-general-pane [restockAside]="restockAside" (onRestockSuccess)="onRestockSuccess()"></restock-general-pane>
+

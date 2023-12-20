@@ -1,0 +1,124 @@
+<div class="main-content-2">
+  <!-- ========== Start section-top ========== -->
+  <section id="section-top">
+    <div class="container">
+      <div id="right-text">
+        <h4>Super Administardor</h4>
+        <h5>Medizona Clínicas</h5>
+      </div>
+
+      <div class="btn-text">
+        <h3>Clínicas</h3>
+        <li
+          class="cursor-pointer"
+          (click)="redirectToPage('/superadmin/clinic/add')"
+        >
+          <i class="fa-solid fa-plus"></i>
+          <span> Agregar Clínica</span>
+        </li>
+      </div>
+
+      <div id="serch-bar">
+        <form class="d-flex" role="search" id="edit">
+          <span class="input-group-text"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></span>
+          <input
+            type="text"
+            (keyup)="searchData($event)"
+            aria-label="Amount (to the nearest dollar)"
+            placeholder="BUSCAR"
+          />
+        </form>
+        <span *ngIf="false">
+          Ordenar por: <img src="./assets/images/Vector.png" alt=""
+        /></span>
+        <div class="tools">
+          <select
+            class="form-select"
+            (change)="onSortChange($event)"
+            aria-label="Default select example"
+          >
+            <option selected="">Ordenar por:</option>
+            <option value="asc">Nombre (a-z)</option>
+            <option value="desc">Nombre (z-a)</option>
+          </select>
+        </div>
+      </div>
+
+      <app-loader *ngIf="loading"></app-loader>
+      <div id="table-box" *ngIf="!loading">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Imagen Perfil</th>
+              <th>Estatus</th>
+              <th>Administradores</th>
+              <th>Médicos</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="
+                let clinic of filteredData()
+                  | paginate : { itemsPerPage: 10, currentPage: p }
+              "
+            >
+              <td>{{ clinic.clinic_name }}</td>
+              <td>
+                <img width="100" src="{{ clinic.picture }}" alt="" />
+              </td>
+              <td
+                *ngIf="clinic.status == 0"
+                style="color: #ff4747; font-weight: 800"
+              >
+                Inactivo
+              </td>
+              <td
+                *ngIf="clinic.status == 1"
+                style="color: #00b050; font-weight: 800"
+              >
+                Activo
+              </td>
+              <td>
+                <span *ngFor="let admin of clinic.administrators"
+                  >{{ admin.name }}<br
+                /></span>
+              </td>
+              <td>
+                <span *ngFor="let doc of clinic.doctors"
+                  >{{ doc.doctor }}<br
+                /></span>
+              </td>
+              <td
+                style="cursor: pointer"
+                (click)="redirectToPage('/superadmin/clinic/edit', clinic)"
+              >
+                <img src="./assets/images/edit 1.png" alt="" />
+              </td>
+            </tr>
+
+            <tr *ngIf="filteredData().length == 0">
+              <td colspan="7" style="text-align: center">no clinic found</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row mt-3">
+          <div class="col-12 text-end">
+            <pagination-controls
+              (pageChange)="p = $event"
+            ></pagination-controls>
+          </div>
+        </div>
+
+        <!-- <nav aria-label="Page navigation example">
+                <button class="page-item" [disabled]="page === 1" (click)="loadData(page - 1)">Previous</button>
+                <button class="page-item" [disabled]="page * pageSize >= totalItems" (click)="loadData(page + 1)">Next</button>
+            </nav> -->
+      </div>
+    </div>
+  </section>
+  <!-- ========== End section-top ========== -->
+</div>

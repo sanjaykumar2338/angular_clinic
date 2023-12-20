@@ -1,0 +1,137 @@
+<div class="heading">
+    <div class="col-lg-12   edit-box ">
+        <div class="btn">
+            <button class="Exportar padding" (click)="exportToExcel()">Exportar a excel</button>
+        </div>
+    </div>
+    <div class="">
+        <div class="col-lg-12 d-flex justify-content-lg-end">
+            <div class="main-box">
+                <div class="text">
+                    <span style="color: #34367F;
+                    font-family: Montserrat;
+                    font-size: 16px;">Tipo de movimiento</span>
+
+                </div>
+                <div class="tools">
+                    <select class="form-select" aria-label="Default select example" (change)="filterBy($event)">
+                        <option selected value="0">Todos</option>
+                        <option value="1">Ingresos</option>
+                        <option value="2">Egresos</option>
+                    </select>
+                </div>
+            </div>
+          <div class="input-style date-icon">
+            <span> </span>
+            <input
+              type="text"
+              name="daterangeInput"
+              daterangepicker
+            [options]="datePickerOptions"
+            (selected)="selectedDate($event)"
+            />
+          </div>
+        </div>
+      </div>
+</div>
+
+    <!-- table-3 section -->
+    <section class="table-3">
+        <div class="container">
+           <li style="text-align: right; list-style: none;color: #A7A9AC; font-size: 16px;">
+                    Ordenar por:
+                    <img src="images/Vector.png" alt="">
+                </li>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-edit">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Fecha
+                                    </th>
+                                    <th>
+                                        Movimiento
+                                    </th>
+                                    <th>
+                                        Concepto
+                                    </th>
+                                    <th >
+                                        Ingreso
+                                    </th>
+                                    <th>
+                                        Egreso
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="
+                                let item of transactions
+                                  | paginate : { itemsPerPage: 10, currentPage: page };
+                                let i = index;
+                              ">
+                                    <td>{{ item.date | momentDate : "YYYY-MM-DD" }}</td>
+                                    <td [class.edit]="item.type === 'revenue'" [class.color-set]="item.type === 'expenses'">{{item.type === 'revenue' ? 'Ingreso' : 'Egreso' }}</td>
+                                    <td>{{item.comments}}</td>
+                                    <td>{{item.amount_paid | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                    <td>{{item.amount | currency : "USD" : "symbol" : "1.2-2"}}</td>
+
+                                </tr>
+                                <tr *ngIf="!transactions.length && !showLoader" class="text-center">
+                                    <td colspan="5">No se han encontrado resultados</td>
+                                  </tr>
+                                  <tr *ngIf="showLoader" class="text-center">
+                                    <td colspan="5">
+                                      <div class="row">
+                                        <div class="col-12 text-end">
+                                          <app-loader></app-loader>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+
+
+<!-- 
+                                <tr>
+                                    <td>24/06/2023</td>
+                                    <td class=" color-set" >Egreso</td>
+                                    <td>Pago a proveedor:  Material de cuarción SA de CV</td>
+                                    <td>  </td>
+                                    <td>$11,800 </td>
+
+                                </tr>
+
+
+
+
+
+                                <tr>
+                                    <td>24/06/2023</td>
+                                    <td class="edit" >Ingreso</td>
+                                    <td>Pago de consuta: Nombre paciente</td>
+                                    <td> $1,800 </td>
+                                    <td>   </td>
+
+                                </tr> -->
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 text-end">
+                          <pagination-controls
+                            (pageChange)="page = $event"
+                          ></pagination-controls>
+                        </div>
+                      </div>
+
+                </div>
+
+            </div>
+
+            
+
+        </div>
+
+    </section>

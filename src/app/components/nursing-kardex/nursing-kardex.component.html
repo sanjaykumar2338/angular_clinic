@@ -1,0 +1,112 @@
+<div class="">
+    <!-- heading section  -->
+    <section class="heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-sm-4">
+            <div class="text">
+              <h4>Kardex De Enfermería</h4>
+            </div>
+          </div>
+  
+          <div class="col-lg-6 col-sm-8 edit-box p-0">
+            <div class="btn">
+              <li (click)="redirectToAddNewSheet()">
+                <i class="fa-solid fa-plus"></i>
+                <span>Agregar kardex de enfermería</span>
+              </li>
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- heading section close -->
+    <section class="table-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 e-style s-search-bar">
+            <div class="form-edit-style">
+              <form class="d-flex" role="search">
+                <input type="text" placeholder="BUSCAR" [(ngModel)]="searchText" name="searchText">
+                <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+              </form>
+            </div>
+          </div>
+  
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="table-6-style">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Paciente</th>
+                    <th>Médico tratante</th>
+                    <th>Ubicación
+                        actual</th>
+                    <th>Última
+                        Actualización</th>
+                    <th>Encargado
+                        Actualización</th>
+                    <th>Estatus</th>
+                    <th>Agregar<br>
+                        Registros
+                    </th>
+                    <th>Ver</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of filteredRecords | paginate : { itemsPerPage: 10, currentPage: p }">
+                    <td>{{ item.patientName  }}</td>
+                    <td>Dr. {{ item.doctorName }}</td>
+                    <td>{{item.location}}</td>
+                    <td>{{ moment(item.lastUpdate).format('DD/MM/YYYY') + ' ' + moment(item.lastUpdate).format('hh:mm A') }}</td>
+                    <td>  {{item.updatedNurse}}</td>
+                    <td [ngStyle]="{'color': item.active ? '#00B050' : 'red'}">{{item.active ? "Activo": "Inactivo"}}</td>
+                    <td>
+                        <img src="../../../../assets/images/plus.png" alt="" (click)="gotoSelectedSheet(item.expedient_id)">
+                    </td>
+                    <td>
+                        <img src="../../../../assets/images/view-1.png" alt="" (click)="gotoSelectedSheet(item.expedient_id)">
+                    </td>
+  
+                </tr>
+                  <!-- <tr
+  
+                  *ngFor="let nurse of filteredRecords
+                    | paginate : { itemsPerPage: 10, currentPage: p }">
+                    <td>{{nurse.name}}</td>
+                    <td>{{nurse.license_number}}</td>
+                    <td><img style="max-width: 100px;" [src]="imagePath + nurse.signature" alt="" /></td>
+                    <td>{{nurse.email}}</td>
+                    <td>
+                      <button class="td-btn" (click)="editNurse(nurse)"><b>Editar </b></button>
+                    </td>
+                  </tr> -->
+                  <tr *ngIf="!filteredRecords.length && !showLoader" class="text-center">
+                    <td colspan="8">No se han encontrado resultados</td>
+                  </tr>
+                  <tr *ngIf="showLoader" class="text-center">
+                    <td colspan="8">
+                      <div class="row">
+                        <div class="col-12 text-end">
+                          <app-loader></app-loader>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+      <div class="row mt-3">
+        <div class="col-12 text-end">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

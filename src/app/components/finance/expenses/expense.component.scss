@@ -1,0 +1,54 @@
+.heading .input-style {
+  overflow: visible;
+}
+.datepicker-default {
+  .calendar-container {
+    background: #32a8e4;
+    border: 1px solid #32a8e4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    top: 35px;
+    left: 0;
+    font-weight: 700;
+  }
+  .month-year-text {
+    color: #ffffff;
+  }
+  .control {
+    path {
+      fill: #eff1f5;
+    }
+    &:hover {
+      path {
+        fill: #ffffff;
+      }
+    }
+  }
+  .day-name-unit {
+    color: #fafafa;
+  }
+  .day-unit,
+  .year-unit {
+    color: #ffffff;
+    &.is-prev-month {
+      color: #8ed0f0;
+    }
+    &.is-today {
+      background: #8ed0f0;
+    }
+    &:hover,
+    &.is-selected {
+      background: #ffffff;
+      color: #686669;
+    }
+    &.is-disabled {
+      color: #aaa8ab;
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+}
+
+.cursor {
+  cursor: pointer;
+}

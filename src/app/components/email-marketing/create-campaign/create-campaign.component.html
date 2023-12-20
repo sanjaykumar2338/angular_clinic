@@ -1,0 +1,214 @@
+<div class="">
+    <section class="heading">
+        <div class="container">
+
+            <div class="row ">
+                <div class="col-lg-12 ">
+                    <div class="d-flex flex-wrap">
+                        <div class="col-lg-6 col-sm-12  col-12  ">
+                            <div class="text">
+                                <h4 class="set-margin">Crear campaña</h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- section close  -->
+
+    <form [formGroup]="campaignForm">
+        <section class="f-input mt-4">
+            <div class="container-mx">
+                <div class="row">
+                    <div class="col-lg-3 ">
+                        <label for="">Nombre de la campaña</label>
+                        <input type="text" id="name" formControlName="name">
+                        <div *ngIf="campaignFormControl.name.hasError('required') && campaignFormControl.name.touched"
+                            class="text-danger">
+                            Nombre de la campaña es obligatorio.
+                        </div>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <label for="">Asunto</label>
+                        <input type="text" id="subject" formControlName="subject">
+                        <div *ngIf="campaignFormControl.subject.hasError('required') && campaignFormControl.subject.touched" class="text-danger">
+                            El asunto es obligatorio.
+                        </div>
+                    </div>
+                    <div class="col-lg-2 blue_date">
+                        <label for="">Fecha:</label>
+                        
+                        <input 
+                        type="text"
+                        name="daterangeInput"
+                        daterangepicker
+                        (selected)="onSelectDate($event)"
+                        [options]="datePickerOptions"
+                         id="date">
+                        <div *ngIf="campaignFormControl.date.hasError('required') && campaignFormControl.date.touched" class="text-danger">
+                            La fecha es obligatoria.
+                        </div>
+                    </div>
+                    <div class="col-lg-2 ">
+                        <label for="">Horario:</label>
+                        <input type="time" id="schedule" formControlName="schedule">
+                        <div *ngIf="campaignFormControl.schedule.hasError('required') && campaignFormControl.schedule.touched" class="text-danger">
+                            El horario es obligatorio.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <label for="">Mensaje:</label>
+                        <textarea type="text" name="" id="edit-input"  formControlName="message"></textarea>
+                        <!-- <textarea id="message"></textarea> -->
+                        <div *ngIf="campaignFormControl.message.hasError('required') && campaignFormControl.message.touched" class="text-danger">
+                            El mensaje es obligatorio.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="upload">
+            <div class="container-mx">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="upload-style-box ">
+                            <label for="" style="color: #A7A9AC;
+                     font-family: 'Montserrat';
+                     font-size: 15px;
+                     padding-bottom: 6px;">Imagen Header</label>
+                            <div class="style-upload set-height">
+                                <div class="image-upload-wrap">
+                                    <input class="file-upload-input" type="file" (change)="onHeaderImageChange($event);"
+                                        accept="image/*">
+                                    <div class="drag-text">
+
+                                        <img src="../../../../assets/images/Upload icon.png" alt="">
+                                        <h4 class="Arrastar">Arrastar archivo o <span
+                                                style="color: #34367F; border-bottom: 2px solid #34367F;">Explorar</span>
+                                        </h4>
+                                        <p class="Formatos" style="line-height: 11px;">Formatos permitidos JPEG o PNG,
+                                        </p>
+                                        <p class="Formatos" style="line-height: 11px;">Medida: 600px de acnho x 80 de
+                                            alto</p>
+                                        <button class=" Cargar mt-lg-4"> Cargar archivo</button>
+
+                                    </div>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image">
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                                class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="input-group mb-3">
+                                <input type="url" class="form-control" placeholder="URL de la imagen" formControlName="header_image_url">
+                                <span class="input-group-text"><img src="../../../../assets/images/link 1.png"
+                                        alt=""></span>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12 ">
+                        <div class="upload-style-box ">
+                            <label for="" style="color: #A7A9AC;
+                        font-family: 'Montserrat';
+                        font-size: 15px;
+                        padding-bottom: 6px;">Imagen Principal</label>
+                            <div class="style-upload set-height">
+                                <div class="image-upload-wrap">
+                                    <input class="file-upload-input" type="file" (change)="onMainImageChange($event);"
+                                        accept="image/*">
+                                    <div class="drag-text">
+
+                                        <img src="../../../../assets/images/Upload icon.png" alt="">
+                                        <h4 class="Arrastar">Arrastar archivo o <span
+                                                style="color: #34367F; border-bottom: 2px solid #34367F;">Explorar</span>
+                                        </h4>
+                                        <p class="Formatos">Formatos permitidos JPEG o PNG, ( Ancho 600 px),</p>
+                                        <button class=" Cargar mt-lg-4"> Cargar archivo</button>
+
+
+                                    </div>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image">
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                                class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="url" class="form-control" placeholder="URL de la imagen" formControlName="main_image_url">
+                                <span class="input-group-text"><img src="../../../../assets/images/link 1.png"
+                                        alt=""></span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12 ">
+                        <div class="upload-style-box ">
+                            <label for="" style="color: #A7A9AC;
+                        font-family: 'Montserrat';
+                        font-size: 15px;
+                        padding-bottom: 6px;">Imagen final (Opcional)</label>
+                            <div class="style-upload set-height">
+                                <div class="image-upload-wrap">
+                                    <input class="file-upload-input" type="file" (change)="onMainImageChange($event);"
+                                        accept="image/*">
+                                    <div class="drag-text">
+                                        <img src="../../../../assets/images/Upload icon.png" alt="">
+                                        <h4 class="Arrastar">Arrastar archivo o <span
+                                                style="color: #34367F; border-bottom: 2px solid #34367F;">Explorar</span>
+                                        </h4>
+                                        <p class="Formatos">Formatos permitidos JPEG o PNG, (Ancho 600 px)</p>
+                                        <button class=" Cargar mt-lg-4"> Cargar archivo</button>
+
+                                    </div>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image">
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                                class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="url" class="form-control" placeholder="URL de la imagen" formControlName="final_image_url">
+                                <span class="input-group-text"><img src="../../../../assets/images/link 1.png"
+                                        alt=""></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </form>
+
+    <div class="container-mx text-right">
+        <button class="btn btn-primary mr-2" (click)="sendTest()" style="background: #ee7421;">Enviar prueba</button>
+        <button class="btn btn-primary" (click)="send()" style="background: #34367f;">Enviar</button>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<header>
+    <nav class="navbar-1">
+        <div class="container-full">
+            <div class="nav">
+                <div class="logo">
+                    <img src="./assets/images/logo.png" alt="">
+                    <button class="cst-toogle" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa-solid fa-bars"></i></button>
+                </div>
+                <div class="right-menu">
+                    <button routerLink="/logout" class="Cerrar">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- header close  -->
+
+
+<section class="slide-menu">
+    <div class="offcanvas offcanvas-start show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" aria-modal="true" role="dialog">
+        <div class="img-box-1 mt-3 sld-btn">
+            <img src="./assets/images/menu.png" alt="" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+        </div>
+        <div class="offcanvas-body">
+            <div id="btn">
+                <button (click)="redirectToPage('/superadmin')" class="Listado"> Listado de Clínicas</button>
+            </div>
+        </div>
+    </div>
+</section>

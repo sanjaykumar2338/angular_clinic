@@ -1,0 +1,159 @@
+<div class="">
+  <!-- heading section  -->
+  <section class="heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-4">
+          <div class="text">
+            <h4>Egresos</h4>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-8 edit-box p-0">
+          <div class="btn">
+            <button class="Exportar" (click)="exportToExcel()">
+              Exportar a excel
+            </button>
+            <li (click)="showAside()">
+              <i class="fa-solid fa-plus"></i>
+              <span>Agregar nuevo gasto</span>
+            </li>
+          </div>
+          <br />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 d-flex justify-content-lg-end p-0">
+          <div class="input-style date-icon">
+            <span> </span>
+            <input
+              type="text"
+              name="daterangeInput"
+              daterangepicker
+              [options]="datePickerOptions"
+              (selected)="selectedDate($event)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- heading section close -->
+  <section class="table">
+    <div class="container">
+      <div class="box-text">
+        <p>Gastos</p>
+      </div>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <!-- <div class="col-md-3 col-xs-12 float-right">
+          <select class="form-select">
+            <option selected="">Ordenar por:</option>
+            <option value="asc">Paciente (a-z)</option>
+            <option value="desc">Paciente (z-a)</option>
+          </select>
+        </div> -->
+        <div class="row">
+          
+        <div class="table-edit ">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Paciente</th>
+                <th>Concepto</th>
+                <th>Categoría</th>
+                <th>Total</th>
+                <th>Pagado</th>
+                <th>Adeudo</th>
+                <th>Estatus</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let item of expenses
+                    | paginate : { itemsPerPage: 10, currentPage: page };
+                  let i = index;
+                  trackBy: trackByFn
+                "
+              >
+                <td>{{ item.created_at | momentDate : "YYYY-MM-DD" }}</td>
+                <td>{{ item.patient.name }}</td>
+                <td>{{ item.payment_purpose }}</td>
+                <td>
+                  {{ item.category.name }}
+                </td>
+                <td style="color: #34367f; font-weight: 800">
+                  {{ item.amount | currency : "USD" : "symbol" : "1.2-2" }}
+                </td>
+                <td>
+                  {{ item.paid | currency : "USD" : "symbol" : "1.2-2" }}
+                </td>
+                <td>
+                  {{ (item.amount - item.paid) | currency : "USD" : "symbol" : "1.2-2" }}
+                </td>
+
+                <td *ngIf="item.amount-item.paid==0" style="color: green; font-weight: 800">Completo</td>
+                <td *ngIf="item.amount-item.paid!=0" style="color: #ff4747; font-weight: 800">Pendiente</td>
+                
+                <td>
+                  <img
+                    src="../../../../assets/images/view-1.png"
+                    alt=""
+                    class="cursor"
+                  />
+                </td>
+                <td>
+                  <img
+                    src="../../../../assets/images/edit 1.png"
+                    class="cursor"
+                    alt=""
+                    (click)="editExpense(item)"
+                  />
+                </td>
+                <td>
+                  <img
+                    class="cursor"
+                    src="../../../../assets/images/trash 1.png"
+                    alt=""
+                    (click)="deleteExpense(item.id)"
+                  />
+                </td>
+              </tr>
+
+              <tr *ngIf="!expenses.length && !showLoader">
+                <td colspan="11">No se han encontrado resultados</td>
+              </tr>
+              <tr *ngIf="showLoader">
+                <td colspan="11">
+                  <div class="row">
+                    <div class="col-12 text-end">
+                      <app-loader></app-loader>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+        <div class="row mt-3">
+          <div class="col-12 text-end">
+            <pagination-controls
+              (pageChange)="page = $event"
+            ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <expense-aside-pane
+    [selectedExpense]="selectedExpense"
+    [asideState]="asideState"
+    (onExpenseSuccess)="onExpenseSuccess($event)"
+  ></expense-aside-pane>
+</div>

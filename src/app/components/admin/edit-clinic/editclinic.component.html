@@ -1,0 +1,230 @@
+<div class="main-content-2">
+  <div id="right-text">
+    <h5>Medizona Clínicas</h5>
+    <h4>Super Administardor</h4>
+  </div>
+  <div class="btn-text add-border">
+    <h3>Editar clínica</h3>
+  </div>
+
+  <form class="form-add" [formGroup]="form">
+    <div class="on-off col-lg-12">
+      <span>Estatus</span>
+      <input
+        type="checkbox"
+        #toggleButton
+        id="switch"
+        [checked]="form.get('status')?.value"
+        formControlName="status"
+        (change)="updateStatus(form)"
+      /><label for="switch">Toggle</label>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <label for="">Nombre de la clínica</label>
+          <input
+            type="text"
+            name=""
+            id=""
+            formControlName="clinic_name"
+            placeholder="Nombre de la clínica"
+          />
+        </div>
+        <div class="col-lg-12">
+          <label for="">Instagram (Por ejemplo @nombre de la clínica)</label>
+
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder=""
+            formControlName="insta_id"
+          />
+        </div>
+      </div>
+      <h5 class="Imagen">Imagen de perfil</h5>
+      <div class="logo-align">
+        <img [src]="image_url" alt="" *ngIf="image_url" />
+        <div *ngIf="image_url">
+          <input
+            class="file-upload-inputs"
+            formControlName="file"
+            #fileInput
+            type="file"
+            style="display: none"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+          />
+          <span class="span-1" (click)="openUpload()">Reemplazar</span><br />
+          <span class="span-2" (click)="removeUpload()">Eliminar</span>
+        </div>
+
+        <div
+          class="style-upload set-height set-style col-lg-5"
+          *ngIf="!image_url"
+        >
+          <div class="image-upload-wrap">
+            <input
+              class="file-upload-inputs"
+              formControlName="file"
+              #fileInput
+              type="file"
+              style="display: none"
+              (change)="onFileSelected($event)"
+              accept="image/*"
+            />
+            <div class="drag-text">
+              <img
+                (click)="openUpload()"
+                src="./assets/images/Upload icon.png"
+                alt=""
+              />
+              <h4 class="Arrastar-1">
+                Arrastar archivo o
+                <span style="color: #34367f; border-bottom: 2px solid #34367f"
+                (click)="openFileInput()"
+                  >Explorar</span
+                >
+              </h4>
+              <p class="Formatos-1" style="line-height: 11px">
+                Medida: 600px de acnho x 600 de alto
+              </p>
+              <button class="Cargar-1" (click)="openFileInput()">Cargar archivo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tests" formArrayName="administrators">
+        <h4>Administradores</h4>
+        <div
+          *ngFor="let admin of admins.controls; let i = index"
+          formGroupName="{{ i }}"
+        >
+          <div class="add-test a-border">
+            <div class="text">
+              <span>{{ admin.get("name")?.value }}</span>
+            </div>
+            <div class="icon">
+              <img
+                src="./assets/images/edit 1.png"
+                alt=""
+                (click)="editAdmin(i)"
+              />
+              <img
+                src="./assets/images/trash 1.png"
+                alt=""
+                (click)="removeAdmin(i)"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="item" *ngIf="isAddingAdmin">
+          <h4 class="Asignar">Asignar administradores</h4>
+          <form class="row" [formGroup]="adminForm" autocomplete="off">
+            <div class="col-md-3 col-xs-12 col-sm-12">
+              <label for="">Nombre completo</label>
+              <input type="text" formControlName="name" />
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12">
+              <label for="">Correo electrónico</label>
+              <input
+                type="text"
+                formControlName="email"
+                (blur)="validateAdminExistence($event)"
+                autocomplete="off"
+              />
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12">
+              <label for="">Contraseña </label>
+              <input
+                type="password"
+                formControlName="password"
+                (keyup)="checkPasswords()"
+              />
+            </div>
+
+            <div class="col-md-3 col-xs-12 col-sm-12">
+              <label for="">Confirmar Contraseña </label>
+              <input
+                type="password"
+                formControlName="confirm_password"
+                (keyup)="checkPasswords()"
+              />
+              <p
+                *ngIf="adminForm.get('passwordsMismatch')?.value"
+                style="color: red"
+              >
+                Passwords do not match
+              </p>
+            </div>
+          </form>
+
+          <div id="set-btn-right" *ngIf="editedAdminIndex < 0">
+            <li (click)="removeAdminForm()">
+              <i class="fa-solid fa-minus"></i>
+              <span>Remove</span>
+            </li>
+          </div>
+        </div>
+      </div>
+      <div id="set-btn-right" class="right" *ngIf="editedAdminIndex < 0">
+        <li (click)="addNewAdmin()">
+          <i class="fa-solid fa-plus"></i>
+          <span> Agregar</span>
+        </li>
+      </div>
+
+      <div id="set-btn-right" class="right" *ngIf="editedAdminIndex > -1">
+        <li (click)="resetEditAdmin()">
+          <i class="fa-solid fa-minus"></i>
+          <span> Cancelar</span>
+        </li>
+      </div>
+      <div id="set-btn-right" class="right" *ngIf="editedAdminIndex > -1">
+        <li (click)="updateExistingAdmin()">
+          <i class="fa-solid fa-plus"></i>
+          <span> Actualizar</span>
+        </li>
+      </div>
+
+      <div class="tests" formArrayName="doctors">
+        <h4>Médicos</h4>
+        <div *ngFor="let doc of doctors.controls; let i = index">
+          <div class="add-test a-border" formGroupName="{{ i }}">
+            <div class="text">
+              <span>{{ doc.get("doctor")?.value }}</span>
+            </div>
+            <div class="icon">
+              <!-- <img src="./assets/images/edit 1.png" alt="" /> -->
+              <img
+                src="./assets/images/trash 1.png"
+                alt=""
+                (click)="removeDoctor(i)"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <ngx-select
+            [items]="predefinedSuggestions"
+            [(ngModel)]="selectedDocId"
+            [ngModelOptions]="{ standalone: true }"
+            [placeholder]="'Escriba el nombre del médico'"
+            (selectionChanges)="onSelectionChanges($event)"
+          >
+          </ngx-select>
+        </div>
+        <div class="right">
+          <li (click)="addNewDoctor()">
+            <i class="fa-solid fa-plus"></i>
+            <span>Agregar</span>
+          </li>
+        </div>
+      </div>
+    </div>
+    <button class="GUARDAR" (click)="updateClinic()">GUARDAR</button>
+  </form>
+</div>

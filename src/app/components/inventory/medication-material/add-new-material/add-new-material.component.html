@@ -1,0 +1,217 @@
+<section class="right-2" id="form-right-side">
+  <div
+    class="offcanvas offcanvas-end"
+    [ngClass]="{ show: !asideState.hidden }"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+        (click)="closeAside()"
+      ></button>
+    </div>
+    <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
+      <div class="offcanvas-body">
+        <h3 class="Agregar-">Agregar Medicamento o Material de curación</h3>
+        <div class="row">
+          <div class="col-lg-12">
+            <input type="text" placeholder="Código" formControlName="code">
+            <div
+            *ngIf="
+              inventoryForm.get('code').invalid &&
+              inventoryForm.get('code').touched
+            "
+            class="text-danger"
+          >
+          Código is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <input type="text" placeholder="Descripción" formControlName="description">
+            <div
+            *ngIf="
+              inventoryForm.get('description').invalid &&
+              inventoryForm.get('description').touched
+            "
+            class="text-danger"
+          >
+          Descripción is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <input type="text" placeholder="Centro de distribución" formControlName="description_center">
+            <div
+            *ngIf="
+              inventoryForm.get('description_center').invalid &&
+              inventoryForm.get('description_center').touched
+            "
+            class="text-danger"
+          >
+          Centro de distribución is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <input type="text" placeholder="Lote" formControlName="batch">
+            <div
+            *ngIf="
+              inventoryForm.get('batch').invalid &&
+              inventoryForm.get('batch').touched
+            "
+            class="text-danger"
+          >
+          Lote is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <input type="text" placeholder="Almacén" formControlName="warehouse">
+            <div
+            *ngIf="
+              inventoryForm.get('warehouse').invalid &&
+              inventoryForm.get('warehouse').touched
+            "
+            class="text-danger"
+          >
+          Almacén is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <input type="text" placeholder="Material" formControlName="material_type">
+
+            <div
+            *ngIf="
+              inventoryForm.get('material_type').invalid &&
+              inventoryForm.get('material_type').touched
+            "
+            class="text-danger"
+          >
+          Tipo de material is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <input type="text" placeholder="Ubicación" formControlName="location">
+            <div
+            *ngIf="
+              inventoryForm.get('location').invalid &&
+              inventoryForm.get('location').touched
+            "
+            class="text-danger"
+          >
+          Ubicación is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <input type="text" placeholder="Stock disponible" formControlName="available_stock">
+            <div
+            *ngIf="
+              inventoryForm.get('available_stock').invalid &&
+              inventoryForm.get('available_stock').touched
+            "
+            class="text-danger"
+          >
+          Stock disponible is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <select class="form-select" aria-label="Default select example" formControlName="unit_of_measure" aria-placeholder="" placeholder="Unidad de medida">
+              <option value="" disabled selected>Unidad de medida</option>
+              <option value="mg">Miligramo</option>
+              <option value="mcg">Miligramo</option>
+              <option value="ml">Mililitro</option>
+              <option value="g">Gramo</option>
+              <option value="m">Metro</option>
+              <option value="kg">Kilogramo</option>
+              <option value="l">Litro</option>
+              <option value="pcs">Pieza</option>
+            </select>
+            <div
+            *ngIf="
+              inventoryForm.get('unit_of_measure').invalid &&
+              inventoryForm.get('unit_of_measure').touched
+            "
+            class="text-danger"
+          >
+          Unidad de medida is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="c-input blue_date">
+              <input
+              type="text"
+              name="daterangeInput"
+              daterangepicker
+              (selected)="selectedWarehouseDate($event)"
+              [options]="datePickerOptions"
+              placeholder="Fecha de entrada al almacén"
+            />
+            </div>
+            <div
+            *ngIf="
+              inventoryForm.get('entry_date_warehouse').invalid &&
+              inventoryForm.get('entry_date_warehouse').touched
+            "
+            class="text-danger"
+          >
+          Fecha de entrada al almacén is required.
+          </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="c-input blue_date">
+              <input
+              type="text"
+              name="daterangeInput1"
+              daterangepicker
+              [options]="datePickerOptions2"
+              (selected)="selectedExpiryDate($event)"
+              placeholder="Fecha de caducidad"
+            />
+            <div
+            *ngIf="
+              inventoryForm.get('expiry_date').invalid &&
+              inventoryForm.get('expiry_date').touched
+            "
+            class="text-danger"
+          >
+          Fecha de caducidad is required.
+          </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <label for="costo" id="label">Costo:</label>
+            <input type="text" id="costo" formControlName="cost">
+            <div
+            *ngIf="
+              inventoryForm.get('cost').invalid &&
+              inventoryForm.get('cost').touched
+            "
+            class="text-danger"
+          >
+          Costo is required.
+          </div>
+          </div>
+          <div class="col-lg-6">
+            <label for="precioPublico" id="label">Precio Público:</label>
+            <input type="text" id="precioPublico" formControlName="public_price">
+            <div
+            *ngIf="
+              inventoryForm.get('public_price').invalid &&
+              inventoryForm.get('public_price').touched
+            "
+            class="text-danger"
+          >
+          Precio Público is required.
+          </div>
+          </div>
+        </div>
+        <button type="submit" class=" PAGAR mt-4"> GUARDAR</button>
+      </div>
+    </form>
+    
+  </div>
+</section>

@@ -1,0 +1,56 @@
+<div class="">
+  <section class="heading">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-6 col-sm-4">
+          <div class="text">
+            <h4 class="set-margin">Balance del paciente</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="all-btn remove-btm">
+            <table>
+              <tbody>
+                <tr>
+                  <th (click)="changeTab(0)" [class.set-border]="currentTab !== 0" [class.Resumen]="currentTab === 0" class="">Balance</th>
+                  <th (click)="changeTab(1)" [class.set-border]="currentTab !== 1" [class.Resumen]="currentTab === 1" class="">Movimientos</th>
+                  <th (click)="changeTab(2)" [class.set-border]="currentTab !== 2" [class.Resumen]="currentTab === 2" class="">Facturación</th>
+                  <th (click)="changeTab(3)" [class.set-border]="currentTab !== 3" [class.Resumen]="currentTab === 3" class="">Documentos</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <div class="col-lg-4 edit-box">
+          <div class="btn">
+            <button class="Exportar padding">Exportar a excel</button>
+          </div>
+          <br />
+        </div> -->
+      </div>
+
+      <div class="row align-items-end" *ngIf="patientDetail">
+				<div class="col-lg-12">
+                    <div class="text">
+                        <h5><span style="color:#34367F; font-weight: 700;"> Paciente:</span> {{patientDetail.patient_name}}</h5>
+                        <h6><span style="color:#34367F;font-weight: 700;">Expediente:</span> {{patientDetail.medical_record_number}}</h6>
+                        <h3><span style="color: #34367F;font-weight: 700;">Médico tratante:</span> {{patientDetail.treating_physician}}
+                            Chavez</h3>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+  </section>
+
+  <patient-balance *ngIf="currentTab === 0" [patientBalance]="patientDetail?.balance"></patient-balance>
+  <patient-transaction *ngIf="currentTab === 1"></patient-transaction>
+  <patient-facturation *ngIf="currentTab === 2"></patient-facturation>
+  <patient-document *ngIf="currentTab === 3"></patient-document>
+
+
+</div>

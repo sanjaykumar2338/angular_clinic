@@ -1,0 +1,29 @@
+<section id="to-do-list">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="elements">
+                    <h6>Consultorios / Salas</h6>
+                    <div class="row">
+                        <div class="col-lg-6 ">
+                            <label for="" class="Agregar-nuevo">Agregar nuevo</label>
+                            <div class="">
+                                <input type="search" class="s-width" [(ngModel)]="roomName">
+                                <button type="button" class="btn btn-primary" (click)="addRoom()">Agregar Sala</button>
+                            </div>
+                            <div class="list-add">
+                                <li *ngFor="let room of rooms">
+                                    <span> {{room.name}}</span>
+                                    <img src="../../../assets/images/trash 1.png" class="pointer" alt="" (click)="deleteRoom(room.id)">
+                                </li>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

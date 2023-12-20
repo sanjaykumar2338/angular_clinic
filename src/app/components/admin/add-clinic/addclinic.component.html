@@ -1,0 +1,205 @@
+<div class="main-content-2">
+  <div id="right-text">
+    <h4>Super Administardor</h4>
+    <h5>Medizona Clínicas</h5>
+  </div>
+  <div class="btn-text">
+    <h3>Agregar clínica</h3>
+  </div>
+
+  <section id="form">
+    <div class="container">
+      <div class="row">
+        <form [formGroup]="myForm" autocomplete="off">
+          <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+          <div class="col-lg-12">
+            <label for="">Nombre de la clínica</label>
+            <input
+              type="text"
+              name="clinic_name"
+              id="clinic_name"
+              formControlName="clinic_name"
+            />
+
+            <div
+              *ngIf="
+                (myForm.get('clinic_name')?.invalid &&
+                  myForm.get('clinic_name')?.touched) ||
+                (submitted && myForm.get('clinic_name')?.invalid)
+              "
+              class="text-danger"
+            >
+              Nombre is required.
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <label for="">Instagram (Por ejemplo @nombre de la clínica)</label>
+            <input
+              type="text"
+              name="insta_id"
+              id="insta_id"
+              formControlName="insta_id"
+            />
+
+            <div
+              *ngIf="
+                (myForm.get('insta_id')?.invalid &&
+                  myForm.get('insta_id')?.touched) ||
+                (submitted && myForm.get('insta_id')?.invalid)
+              "
+              class="text-danger"
+            >
+              Instagram is required.
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <label for="">Imagen de perfil</label>
+            <div class="style-upload set-height set-style">
+              <div class="image-upload-wrap">
+                <input
+                  class="file-upload-inputs"
+                  formControlName="file"
+                  #fileInput
+                  type="file"
+                  style="display: none"
+                  (change)="onFileSelected($event)"
+                  accept="image/*"
+                />
+                <div class="drag-text">
+                  <img
+                    (click)="openUpload()"
+                    src="./assets/images/Upload icon.png"
+                    alt=""
+                  />
+                  <h4 class="Arrastar-1">
+                    Arrastar archivo o
+                    <span
+                      (click)="openFileInput()"
+                      style="color: #34367f; border-bottom: 2px solid #34367f"
+                      >Explorar</span
+                    >
+                  </h4>
+                  <p class="Formatos-1" style="line-height: 11px">
+                    Medida: 600px de acnho x 600 de alto
+                  </p>
+                  <button class="Cargar-1" (click)="openFileInput()">Cargar archivo</button>
+                </div>
+              </div>
+
+              <div class="file-upload-content">
+                <img
+                  class="file-upload-image"
+                  [src]="imageUrl"
+                  alt="your image"
+                />
+                <div class="image-title-wrap">
+                  <button
+                    type="button"
+                    (click)="removeUpload()"
+                    class="remove-image"
+                  >
+                    Remove <span class="image-title">Uploaded Image</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="submitted && selectedFile == null" class="text-danger">
+              Imagen is required.
+            </div>
+          </div>
+        </form>
+
+        <div *ngFor="let item of items; let i = index" class="item">
+          <div class="col-lg-12">
+            <h4 class="Asignar">Asignar administradores</h4>
+            <label for="">Nombre completo</label>
+            <input type="text" [(ngModel)]="item.name" />
+          </div>
+          <div class="col-lg-12">
+            <label for="">Correo electrónico</label>
+            <input
+              type="text"
+              [(ngModel)]="item.email"
+              (blur)="validateAdminExistence(item)"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-lg-12">
+            <label for="">Contraseña </label>
+            <input
+              type="password"
+              [(ngModel)]="item.password"
+              (keyup)="checkPasswords(i)"
+            />
+          </div>
+
+          <div class="col-lg-12">
+            <label for="">Confirmar Contraseña </label>
+            <input
+              type="password"
+              [(ngModel)]="item.confirm_password"
+              (keyup)="checkPasswords(i)"
+            />
+            <p *ngIf="item.passwordsMismatch" style="color: red">
+              Passwords do not match
+            </p>
+          </div>
+          <div id="set-btn-right" *ngIf="i != 0" (click)="removeItem(i)">
+            <li>
+              <i class="fa-solid fa-minus"></i>
+              <span>Remove</span>
+            </li>
+          </div>
+          <br />
+        </div>
+
+        <div id="set-btn-right" (click)="cloneItemAdmin()">
+          <li>
+            <i class="fa-solid fa-plus"></i>
+            <span> Agregar otro</span>
+          </li>
+        </div>
+
+        <div class="col-lg-12">
+          <h5 class="Escriba">Asignar médicos</h5>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <label for="">Nombre</label>
+            <div *ngFor="let item2 of doctors; let i = index" class="item mt-2">
+              <ngx-select
+                [items]="docList"
+                [(ngModel)]="item2.id"
+                name="{{ i }}"
+                [placeholder]="'Escriba el nombre del médico'"
+                (selectionChanges)="onSelectionChanges($event, i)"
+              >
+              </ngx-select>
+              <div
+                id="set-btn-right"
+                (click)="removeDoctors(i)"
+                *ngIf="item2.doctor"
+                class="mt-2"
+              >
+                <li>
+                  <i class="fa-solid fa-minus"></i>
+                  <span>Remove</span>
+                </li>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="set-btn-right" (click)="cloneItemDoctor()" class="mt-2">
+          <li>
+            <i class="fa-solid fa-plus"></i>
+            <span> Agregar otro</span>
+          </li>
+        </div>
+      </div>
+      <button class="GUARDAR" (click)="onSubmit()">GUARDAR</button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,84 @@
+<div class="">
+  <!-- heading section  -->
+  <section class="heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-4">
+          <div class="text">
+            <h4>Personal De Enfermería Y Asistentes</h4>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-8 edit-box p-0">
+          <div class="btn">
+            <li (click)="showAside()">
+              <i class="fa-solid fa-plus"></i>
+              <span>Agregar hoja de enfermería</span>
+            </li>
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- heading section close -->
+  <section class="table-6">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="table-6-style">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Cédula</th>
+                  <th>Firma</th>
+                  <th>Correo autorizado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+
+                *ngFor="let nurse of nurseList
+                  | paginate : { itemsPerPage: 10, currentPage: p }">
+                  <td>{{nurse.name}}</td>
+                  <td>{{nurse.license_number}}</td>
+                  <td><img style="max-width: 100px;" [src]="imagePath + nurse.signature" alt="" /></td>
+                  <td>{{nurse.email}}</td>
+                  <td>
+                    <button class="td-btn" (click)="editNurse(nurse)"><b>Editar </b></button>
+                  </td>
+                </tr>
+                <tr *ngIf="!nurseList.length && !showLoader" class="text-center">
+                  <td colspan="5">No se han encontrado resultados</td>
+                </tr>
+                <tr *ngIf="showLoader" class="text-center">
+                  <td colspan="5">
+                    <div class="row">
+                      <div class="col-12 text-end">
+                        <app-loader></app-loader>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+    <div class="row mt-3">
+      <div class="col-12 text-end">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <add-nursing
+    [selectedNurse]="selectedNurse"
+    [asideState]="asideState"
+    (onSuccess)="onSuccess($event)"
+    [image_path]="imagePath"
+  ></add-nursing>
+</div>

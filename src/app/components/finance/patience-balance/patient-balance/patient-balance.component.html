@@ -1,0 +1,72 @@
+<div class="col-lg-12 pull-right mt-3">
+    <div class="text-right-lg">
+        <a class="export-btn" href="javascript:void(0)" (click)="exportToExcel()">Exportar a excel</a>
+    </div>
+</div>
+<section class="table-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="table-5-style">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Importe total</th>
+                                <th>Descuentos</th>
+                                <th>Plan de pagos</th>
+                                <th>Comisiones</th>
+                                <th>Pagado</th>
+                                <th>Pendiente</th>
+                                <th>Seguro</th>
+                                <th>Aseguradora</th>
+                                <th>Fecha de
+                                    última actualización</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of patientBalance | paginate : { itemsPerPage: 10, currentPage: page }; let i = index;">
+                                <td> {{item.total_amount | currency : "USD" : "symbol" : "1.2-2" }}</td>
+                                <td> {{(item.discount || 0) | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                <td> {{item.payment_plan || '-'}}</td>
+                                <td> {{(item.commission || 0) | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                <td>{{(item.paid || 0) | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                <td>{{(item.pending || 0) | currency : "USD" : "symbol" : "1.2-2"}}</td>
+                                
+                                <td> 
+                                    <img src="../../../../assets/images/check 1.png" alt="" *ngIf="item.insurance">
+                                </td>
+                                <td> {{item.insurance_company || '-'}}</td>
+                                <td> {{item.last_update  | momentDate : "YYYY-MM-DD"}}</td>
+
+                            </tr>
+                            <tr *ngIf="!patientBalance.length && !showLoader" class="text-center">
+                                <td colspan="9">No se han encontrado resultados</td>
+                              </tr>
+                              <tr *ngIf="showLoader">
+                                <td colspan="9">
+                                  <div class="row">
+                                    <div class="col-12 text-end">
+                                      <app-loader></app-loader>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                        </tbody>
+                    </table>
+                    <div class="row mt-3">
+                        <div class="col-12 text-end">
+                          <pagination-controls
+                            (pageChange)="page = $event"
+                          ></pagination-controls>
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

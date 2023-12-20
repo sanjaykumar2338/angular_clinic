@@ -1,0 +1,219 @@
+<section class="right-2 right-menu-bar">
+  <div
+    class="offcanvas offcanvas-end"
+    [ngClass]="{ show: !asideState.hidden }"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+        (click)="closeAside()"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <h3>Registrar</h3>
+
+      <form class="" [formGroup]="nursingForm" (ngSubmit)="onSubmit()">
+        <div class="form">
+          <input
+            type="text"
+            formControlName="name"
+            id=""
+            placeholder="Nombre completo"
+          />
+          <input
+            type="text"
+            formControlName="license_number"
+            id=""
+            placeholder="Cedula"
+          />
+          <input
+            type="text"
+            formControlName="academic_degree"
+            id=""
+            placeholder="Grado Académico"
+          />
+          <input
+            type="text"
+            formControlName="email"
+            id=""
+            placeholder="Correo electrónico Email"
+          />
+          <input
+            type="text"
+            formControlName="password"
+            id=""
+            placeholder="Contraseña"
+          />
+        </div>
+        <div class="center-text">
+          <!-- <h3 class="Permisos">Permisos</h3>
+          <div>
+            <div
+              class="toggle-btn"
+              *ngFor="let permission of permissions; let i = index"
+            >
+              <div class="toggle-button-cover">
+                <div class="button-cover">
+                  <div class="button r" id="button-4">
+                    <input
+                      type="checkbox"
+                      class="checkbox"
+                      [checked]="permission.checked"
+                      (change)="togglePermission($event, i)"
+                    />
+                    <div class="knobs"></div>
+                    <div class="layer"></div>
+                  </div>
+                </div>
+              </div>
+              <p>{{ permission.name }}</p>
+            </div>
+          </div> -->
+
+          <div class="sig">
+            <h2>Firma</h2>
+            <div class="img-box">
+              <signature-pad
+                #signature
+                [options]="signaturePadOptions"
+                (drawEnd)="drawComplete($event)"
+              ></signature-pad>
+              <button
+                type="button"
+                class="Eliminar"
+                (click)="signaturePad.clear()"
+              >
+                Eliminar firma
+              </button>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <h4>Identificación Oficial</h4>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="upload-style-box">
+                <h6 class="h6">Frente</h6>
+                <div class="style-upload">
+                  <div class="image-upload-wrap">
+                    <input
+                      class="file-upload-input"
+                      type="file"
+                      (change)="uploadFrontId($event)"
+                      accept="image/*"
+                      #frontId
+                    />
+                    <div class="drag-text" *ngIf="!frontIdImage">
+                      <h4 class="h4">
+                        Arrastar archivo o
+                        <span
+                          style="
+                            color: #34367f;
+                            border-bottom: 2px solid #34367f;
+                          "
+                          >Explorar</span
+                        >
+                      </h4>
+                      <img
+                        src="../../../../assets/images/Upload icon.png"
+                        alt=""
+                      />
+                      <p class="JPEG">Formatos permitidos JPEG, PNG, PDF</p>
+                    </div>
+                  </div>
+                  <div
+                    class="file-upload-content"
+                    *ngIf="frontIdImage"
+                    [class.show]="frontIdImage"
+                  >
+                    <img
+                      class="file-upload-image"
+                      [src]="frontIdImage"
+                      alt="your image"
+                    />
+                    <div class="image-title-wrap">
+                      <button
+                        type="button"
+                        class="remove-image"
+                        (click)="removeUpload('frontId')"
+                      >
+                        Remove <span class="image-title">Uploaded Image</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="Cargar" (click)="frontId.click()">
+                  Cargar archivo
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+              <div class="upload-style-box">
+                <h6 class="h6">Reverso</h6>
+                <div class="style-upload">
+                  <div class="image-upload-wrap">
+                    <input
+                      class="file-upload-input"
+                      type="file"
+                      (change)="uploadBackId($event)"
+                      accept="image/*"
+                      #backId
+                    />
+                    <div class="drag-text" *ngIf="!backIdImage">
+                      <h4 class="h4">
+                        Arrastar archivo o
+                        <span
+                          style="
+                            color: #34367f;
+                            border-bottom: 2px solid #34367f;
+                          "
+                          >Explorar</span
+                        >
+                      </h4>
+                      <img
+                        src="../../../../assets/images/Upload icon.png"
+                        alt=""
+                      />
+                      <p class="JPEG">Formatos permitidos JPEG, PNG, PDF</p>
+                    </div>
+                  </div>
+                  <div
+                    class="file-upload-content"
+                    *ngIf="backIdImage"
+                    [class.show]="backIdImage"
+                  >
+                    <img
+                      class="file-upload-image"
+                      [src]="backIdImage"
+                      alt="your image"
+                    />
+                    <div class="image-title-wrap">
+                      <button
+                        type="button"
+                        (click)="removeUpload('backId')"
+                        class="remove-image"
+                      >
+                        Remove <span class="image-title">Uploaded Image</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button class="Cargar" type="button" (click)="backId.click()">
+                  Cargar archivo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="AGENDAR-button" type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
+</section>
